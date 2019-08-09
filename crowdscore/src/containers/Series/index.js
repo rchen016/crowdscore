@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SeriesList from '../../components/SeriesList';
 import Loader from '../../components/Loader';
 import Intro from '../../components/intro';
+import Container from 'react-bootstrap'
+
 class Series extends Component{
 	state = {
 		series: [],
@@ -19,6 +21,7 @@ class Series extends Component{
 	render(){
 		const { series, seriesName, isFetching } = this.state;
 		return(
+
 			<div>
 				 <Intro message="Here you can find all your most loved series"/>
 				<div>
@@ -28,7 +31,7 @@ class Series extends Component{
 						onChange={this.onSeriesInputChange} />
 				</div>
 				{
-					!isFetching && series.length==0 && seriesName.trim() === ''
+					!isFetching && series.length===0 && seriesName.trim() === ''
 					&&
 					<p> Please enter Series Name </p>
 				}
