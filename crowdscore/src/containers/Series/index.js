@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SeriesList from '../../components/SeriesList';
 import Loader from '../../components/Loader';
 import Intro from '../../components/intro';
-import Container from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class Series extends Component{
 	state = {
@@ -21,32 +21,41 @@ class Series extends Component{
 	render(){
 		const { series, seriesName, isFetching } = this.state;
 		return(
+			<React.Fragment>
+				<Container className="mainBox">
+					<Row className="justify-content-md-center text-center">
+						<Col md="auto">
+							<Intro message="Fastest TV Rater"/>
+							<input
+		   						value={seriesName}
+		   						type="text"
+		   						onChange={this.onSeriesInputChange} />
+						</Col>
+					</Row>
+					<Row>
+						<Col className="justify-content-md-center text-center">
+							{
+								!isFetching && series.length===0 && seriesName.trim() === ''
+								&&
+								<p> Please enter Series Name </p>
+							}
+							{
+								!isFetching && series.length===0 && seriesName.trim() !== ''
+								&&
+								<p> None Found </p>
+							}
+							{
+								isFetching && <Loader />
+							}
+							{
+								!isFetching && <SeriesList list={this.state.series} />
+							}
+						</Col>
 
-			<div>
-				 <Intro message="Here you can find all your most loved series"/>
-				<div>
-					<input
-						value={seriesName}
-						type="text"
-						onChange={this.onSeriesInputChange} />
-				</div>
-				{
-					!isFetching && series.length===0 && seriesName.trim() === ''
-					&&
-					<p> Please enter Series Name </p>
-				}
-				{
-					!isFetching && series.length===0 && seriesName.trim() !== ''
-					&&
-					<p> None Found </p>
-				}
-				{
-					isFetching && <Loader />
-				}
-				{
-					!isFetching && <SeriesList list={this.state.series} />
-				}
-			</div>
+					</Row>
+				</Container>
+			</React.Fragment>
+
 
 		)
 	}

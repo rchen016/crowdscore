@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from '../../components/Loader';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 class SingleSeries extends Component{
 	state = {
@@ -17,19 +18,34 @@ class SingleSeries extends Component{
 		const { show } = this.state;
 
 		return(
-			<div>
+			<React.Fragment>
 				{ show===null && <Loader />}
-				{
-					show!==null
-					&&
-					<div>
-						<p> Name - {show.name}</p>
-						<p> Rating - {show.rating.average} </p>
-						<p> Episodes - {show._embedded.episodes.length}</p>
-						<p> <img alt="Show" src={show.image.medium} /> </p>
-					</div>
-				}
-			</div>
+				<Container>
+					<Row>
+						<Col>
+							{
+								show!==null
+								&&
+								<Card className="sSeriesCard">
+							    	<Card.Img variant="top" src={show.image.medium} />
+							  		<Card.Body>
+								    	<Card.Title className="text-center"> {show.name} </Card.Title>
+								    	<Card.Text>
+								      		Rating - {show.rating.average}
+								    	</Card.Text>
+										<Card.Text>
+									  		Episodes - {show._embedded.episodes.length}
+								    	</Card.Text>
+								    	<Button variant="primary">Go somewhere</Button>
+							  		</Card.Body>
+								</Card>
+							}
+						</Col>
+					</Row>
+				</Container>
+
+			</React.Fragment>
+
 		)
 	}
 }
