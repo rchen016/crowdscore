@@ -4,8 +4,8 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 class SingleSeries extends Component{
 	state = {
-		show: null,
-		imdbRating: null
+		tvmaze: null,
+		omdb: null
 	}
 
 	componentDidMount(){
@@ -14,13 +14,14 @@ class SingleSeries extends Component{
 			.then( (response) => response.json() )
 			.then(
 					json => {
-					this.setState( { show: json });
-					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.show.name}`)
+						console.log(json);
+					this.setState( { tvmaze: json });
+					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
 					.then((response) => response.json())
 					.then(
 						json =>{
-							console.log(json.imdbRating);
-							this.setState( { imdbRating: json.imdbRating });
+							console.log(json);
+							this.setState( { omdb: json });
 						}
 					);
 
@@ -28,31 +29,40 @@ class SingleSeries extends Component{
 	}
 
 	render(){
-		const { show } = this.state;
-		const { imdbRating } = this.state;
-
+		const { tvmaze } = this.state;
+		const { omdb } = this.state;
 		return(
 			<React.Fragment>
-				{ show===null && <Loader />}
+				{ tvmaze===null && omdb===null && <Loader /> }
 				<Container>
 					<Row>
 						<Col>
 							{
-								show!==null
+								tvmaze!==null && omdb!==null
 								&&
 								<Card className="sSeriesCard">
-							    	<Card.Img variant="top" src={show.image.medium} />
+							    	<Card.Img variant="top" src={tvmaze.image.original} />
 							  		<Card.Body>
-								    	<Card.Title className="text-center"> {show.name} </Card.Title>
+								    	<Card.Title className="text-center"> {tvmaze.name} </Card.Title>
+										<Card.Title className="text-center"> {tvmaze.network.name} {tvmaze.webChannel.name}</Card.Title>
+										<Card.Title className="text-center"> {tvmaze.premiered} </Card.Title>
+										<Card.Title className="text-center"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Title>
+										<Card.Title className="text-center"> {omdb.rated} </Card.Title>
+										<Card.Title className="text-center"> {tvmaze.genres} </Card.Title>
+
 								    	<Card.Text>
-								      		Rating - {show.rating.average}
+								      		TV Maze Rating - {tvmaze.rating.average}
 								    	</Card.Text>
 										<Card.Text>
-									  		Episodes - {show._embedded.episodes.length}
+											IMDB - {omdb.imdbRating} ({omdb.imdbVotes})
 								    	</Card.Text>
 										<Card.Text>
-									  		IMDB - {imdbRating}
+									  		Episodes - {tvmaze._embedded.episodes.length}
 								    	</Card.Text>
+										<Card.Text>
+											{omdb.Plot}
+										</Card.Text>
+
 								    	<Button variant="primary">Go somewhere</Button>
 							  		</Card.Body>
 								</Card>
