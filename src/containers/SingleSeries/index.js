@@ -5,7 +5,8 @@ import './index.css';
 class SingleSeries extends Component{
 	state = {
 		tvmaze: null,
-		omdb: null
+		omdb: null,
+		tmdb: null
 	}
 
 	componentDidMount(){
@@ -26,6 +27,13 @@ class SingleSeries extends Component{
 								console.log(json);
 								if(json===null) this.setState( { omdb: null });
 								else this.setState( { omdb: json });
+								fetch(`https://api.themoviedb.org/3/search/tv?api_key=c668e9ba0082ada9bd8061d745ade430&language=en-US&query=${this.state.tvmaze.name}`)
+								.then( (response) => response.json() )
+								.then( json =>{
+										console.log(json.results[0]);
+										this.setState( { tmdb: json.results[0]} );
+									}
+								)
 							}
 						);
 					}
@@ -35,9 +43,10 @@ class SingleSeries extends Component{
 	render(){
 		const { tvmaze } = this.state;
 		const { omdb } = this.state;
+		const { tmdb } = this.state;
 		return(
 			<React.Fragment>
-				{ tvmaze===null && omdb===null }
+				{ tvmaze===null && omdb===null && tmdb===null}
 				<Container>
 					<Row>
 						<Col>
@@ -45,6 +54,8 @@ class SingleSeries extends Component{
 								tvmaze!==null
 								&&
 								omdb!==null
+								&&
+								tmdb!==null
 								&&
 								<Card className="sSeriesCard">
 									{
@@ -74,10 +85,10 @@ class SingleSeries extends Component{
 														tvmaze.rating.average!==null
 														&&
 														<ProgressBar
-															className="progressBar1"
+															className="progressBar"
 															striped variant="success"
 															now={tvmaze.rating.average*10}
-															label={"TV Maze "+tvmaze.rating.average*10}/>
+															label={"TV Maze "+tvmaze.rating.average}/>
 
 													}
 													{
@@ -89,15 +100,31 @@ class SingleSeries extends Component{
 														omdb.imdbRating!==null
 														&&
 														<ProgressBar
+															className="progressBar"
 															striped variant="info"
 															now={omdb.imdbRating*10}
-															label={"IMDB "+omdb.imdbRating*10+" ("+omdb.imdbVotes+")"}/>
+															label={"IMDB "+omdb.imdbRating+" ("+omdb.imdbVotes+")"}/>
 													}
 													{
 														omdb.imdbRating===null
 														&&
 														<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 													}
+													{
+														tmdb.vote_count!==null
+														&&
+														<ProgressBar
+															className="progressBar"
+															striped variant="danger"
+															now={tmdb.vote_average * 10}
+															label={"TMDB "+tmdb.vote_average+" ("+tmdb.vote_count+")"}/>
+													}
+													{
+														tmdb.vote_count===null
+														&&
+														<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+													}
+
 											  </Tab>
 											  <Tab eventKey="showInfo" title="Show Info">
 												   {
