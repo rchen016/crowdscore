@@ -1,5 +1,5 @@
 import React from 'react';
-import loaderSrc from '../../assets/loader.gif'
+import loaderSrc from '../../assets/loader2.gif'
 const Loader = props => (
 	<div>
 		<img

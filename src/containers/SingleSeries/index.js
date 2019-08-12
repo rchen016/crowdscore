@@ -38,32 +38,113 @@ class SingleSeries extends Component{
 					<Row>
 						<Col>
 							{
-								tvmaze!==null && omdb!==null
+								tvmaze!==null
+								&&
+								omdb!==null
 								&&
 								<Card className="sSeriesCard">
-							    	<Card.Img variant="top" src={tvmaze.image.original} />
+									{
+										tvmaze.image!==null
+										&&
+										<Card.Img variant="top" src={tvmaze.image.original} />
+									}
+									{
+										tvmaze.image===null
+										&&
+										<Card.Img variant="top" src="http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg" />
+									}
+
 							  		<Card.Body>
-								    	<Card.Title className="text-center"> {tvmaze.name} </Card.Title>
-										<Card.Title className="text-center"> {tvmaze.network.name} {tvmaze.webChannel.name}</Card.Title>
-										<Card.Title className="text-center"> {tvmaze.premiered} </Card.Title>
-										<Card.Title className="text-center"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Title>
-										<Card.Title className="text-center"> {omdb.rated} </Card.Title>
-										<Card.Title className="text-center"> {tvmaze.genres} </Card.Title>
-
-								    	<Card.Text>
-								      		TV Maze Rating - {tvmaze.rating.average}
-								    	</Card.Text>
-										<Card.Text>
-											IMDB - {omdb.imdbRating} ({omdb.imdbVotes})
-								    	</Card.Text>
-										<Card.Text>
-									  		Episodes - {tvmaze._embedded.episodes.length}
-								    	</Card.Text>
-										<Card.Text>
-											{omdb.Plot}
-										</Card.Text>
-
-								    	<Button variant="primary">Go somewhere</Button>
+										{
+											tvmaze.name!==null
+											&&
+											<Card.Title className="text-center"> {tvmaze.name} </Card.Title>
+										}
+										{
+											tvmaze.name===null
+											&&
+											<Card.Title className="text-center"> No Title Found </Card.Title>
+										}
+										{
+											tvmaze.network.name!==null
+											&&
+											<Card.Title className="text-center"> {tvmaze.network.name}</Card.Title>
+										}
+										{
+											tvmaze.network.name===null
+											&&
+											<Card.Title className="text-center"> No Network Found </Card.Title>
+										}
+										{
+											tvmaze.premiered!==null
+											&&
+											<Card.Title className="text-center"> {tvmaze.premiered} </Card.Title>
+										}
+										{
+											tvmaze.premiered===null
+											&&
+											<Card.Title className="text-center"> No Premiered Date Found </Card.Title>
+										}
+										{
+											omdb.totalSeasons!==null&&tvmaze._embedded.episodes.length!==null
+											&&
+											<Card.Title className="text-center"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Title>
+										}
+										{
+											omdb.totalSeasons===null&&tvmaze._embedded.episodes.length===null
+											&&
+											<Card.Title className="text-center"> No Season Info Found </Card.Title>
+										}
+										{
+											omdb.rated!==null
+											&&
+											<Card.Title className="text-center"> {omdb.rated} </Card.Title>
+										}
+										{
+											omdb.rated===null
+											&&
+											<Card.Title className="text-center"> No Rating Found </Card.Title>
+										}
+										{
+											tvmaze.genres!==null
+											&&
+											<Card.Title className="text-center"> {tvmaze.genres} </Card.Title>
+										}
+										{
+											tvmaze.genres===null
+											&&
+											<Card.Title className="text-center"> No Genre Found </Card.Title>
+										}
+										{
+											tvmaze.rating.average!==null
+											&&
+											<Card.Title className="text-center"> TV Maze: {tvmaze.rating.average} </Card.Title>
+										}
+										{
+											tvmaze.rating.average===null
+											&&
+											<Card.Title className="text-center"> No TV Maze Rating Found </Card.Title>
+										}
+										{
+											omdb.imdbRating!==null
+											&&
+											<Card.Title className="text-center"> IMDB: {omdb.imdbRating} ({omdb.imdbVotes}) </Card.Title>
+										}
+										{
+											omdb.imdbRating===null
+											&&
+											<Card.Title className="text-center"> No IMDB Rating Found </Card.Title>
+										}
+										{
+											omdb.Plot!==null
+											&&
+											<Card.Title className="text-center"> Plot - {omdb.Plot} </Card.Title>
+										}
+										{
+											omdb.Plot===null
+											&&
+											<Card.Title className="text-center"> {tvmaze.summary} </Card.Title>
+										}
 							  		</Card.Body>
 								</Card>
 							}
