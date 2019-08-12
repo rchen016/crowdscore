@@ -3,6 +3,7 @@ import SeriesList from '../../components/SeriesList';
 import Loader from '../../components/Loader';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from "../../assets/logo.png";
+import './index.css';
 
 class Series extends Component{
 	state = {

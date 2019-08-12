@@ -73,7 +73,12 @@ class SingleSeries extends Component{
 													{
 														tvmaze.rating.average!==null
 														&&
-														<ProgressBar striped variant="success" now={tvmaze.rating.average*10} label={tvmaze.rating.average*10}/>
+														<ProgressBar
+															className="progressBar1"
+															striped variant="success"
+															now={tvmaze.rating.average*10}
+															label={"TV Maze "+tvmaze.rating.average*10}/>
+
 													}
 													{
 														tvmaze.rating.average===null
@@ -83,7 +88,10 @@ class SingleSeries extends Component{
 													{
 														omdb.imdbRating!==null
 														&&
-														<ProgressBar striped variant="info" now={omdb.imdbRating*10} label={omdb.imdbRating*10}/>
+														<ProgressBar
+															striped variant="info"
+															now={omdb.imdbRating*10}
+															label={"IMDB "+omdb.imdbRating*10+" ("+omdb.imdbVotes+")"}/>
 													}
 													{
 														omdb.imdbRating===null
@@ -95,7 +103,7 @@ class SingleSeries extends Component{
 												   {
 													   omdb.Rated!==null
 													   &&
-													   <Card.Text className="showInfoContent"> {omdb.Rated} </Card.Text>
+													   <Card.Title className="showInfoContent tvRated"> {omdb.Rated} </Card.Title>
 												   }
 												   {
 													   omdb.Rated===null
