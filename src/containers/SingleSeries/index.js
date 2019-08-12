@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Loader from '../../components/Loader';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, ProgressBar, Nav, Tab, Tabs  } from 'react-bootstrap';
 
 class SingleSeries extends Component{
 	state = {
@@ -15,17 +15,21 @@ class SingleSeries extends Component{
 			.then(
 					json => {
 						console.log(json);
-					this.setState( { tvmaze: json });
-					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
-					.then((response) => response.json())
-					.then(
-						json =>{
-							console.log(json);
-							this.setState( { omdb: json });
-						}
-					);
-
-				})
+					if(json===null) this.setState( { tvmaze: null });
+					else
+					{
+						this.setState( { tvmaze: json });
+						fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
+						.then((response) => response.json())
+						.then(
+							json =>{
+								console.log(json);
+								if(json===null) this.setState( { omdb: null });
+								else this.setState( { omdb: json });
+							}
+						);
+					}
+				});
 	}
 
 	render(){
@@ -33,7 +37,7 @@ class SingleSeries extends Component{
 		const { omdb } = this.state;
 		return(
 			<React.Fragment>
-				{ tvmaze===null && omdb===null && <Loader /> }
+				{ tvmaze===null && omdb===null }
 				<Container>
 					<Row>
 						<Col>
@@ -53,8 +57,7 @@ class SingleSeries extends Component{
 										&&
 										<Card.Img variant="top" src="http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg" />
 									}
-
-							  		<Card.Body>
+									<Card.Body>
 										{
 											tvmaze.name!==null
 											&&
@@ -65,89 +68,101 @@ class SingleSeries extends Component{
 											&&
 											<Card.Title className="text-center"> No Title Found </Card.Title>
 										}
-										{
-											tvmaze.network.name!==null
-											&&
-											<Card.Title className="text-center"> {tvmaze.network.name}</Card.Title>
-										}
-										{
-											tvmaze.network.name===null
-											&&
-											<Card.Title className="text-center"> No Network Found </Card.Title>
-										}
-										{
-											tvmaze.premiered!==null
-											&&
-											<Card.Title className="text-center"> {tvmaze.premiered} </Card.Title>
-										}
-										{
-											tvmaze.premiered===null
-											&&
-											<Card.Title className="text-center"> No Premiered Date Found </Card.Title>
-										}
-										{
-											omdb.totalSeasons!==null&&tvmaze._embedded.episodes.length!==null
-											&&
-											<Card.Title className="text-center"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Title>
-										}
-										{
-											omdb.totalSeasons===null&&tvmaze._embedded.episodes.length===null
-											&&
-											<Card.Title className="text-center"> No Season Info Found </Card.Title>
-										}
-										{
-											omdb.rated!==null
-											&&
-											<Card.Title className="text-center"> {omdb.rated} </Card.Title>
-										}
-										{
-											omdb.rated===null
-											&&
-											<Card.Title className="text-center"> No Rating Found </Card.Title>
-										}
-										{
-											tvmaze.genres!==null
-											&&
-											<Card.Title className="text-center"> {tvmaze.genres} </Card.Title>
-										}
-										{
-											tvmaze.genres===null
-											&&
-											<Card.Title className="text-center"> No Genre Found </Card.Title>
-										}
-										{
-											tvmaze.rating.average!==null
-											&&
-											<Card.Title className="text-center"> TV Maze: {tvmaze.rating.average} </Card.Title>
-										}
-										{
-											tvmaze.rating.average===null
-											&&
-											<Card.Title className="text-center"> No TV Maze Rating Found </Card.Title>
-										}
-										{
-											omdb.imdbRating!==null
-											&&
-											<Card.Title className="text-center"> IMDB: {omdb.imdbRating} ({omdb.imdbVotes}) </Card.Title>
-										}
-										{
-											omdb.imdbRating===null
-											&&
-											<Card.Title className="text-center"> No IMDB Rating Found </Card.Title>
-										}
-										{
-											omdb.Plot!==null
-											&&
-											<Card.Title className="text-center"> Plot - {omdb.Plot} </Card.Title>
-										}
-										{
-											omdb.Plot===null
-											&&
-											<Card.Title className="text-center"> {tvmaze.summary} </Card.Title>
-										}
-							  		</Card.Body>
+										<Tabs defaultActiveKey="rating" id="singleSeriesTabs">
+											<Tab eventKey="rating" title="Rating">
+											{
+												tvmaze.rating.average!==null
+												&&
+												<ProgressBar striped variant="success" now={tvmaze.rating.average*10} label={tvmaze.rating.average*10}/>
+											}
+											{
+												tvmaze.rating.average===null
+												&&
+												<Card.Text className="text-center"> No TV Maze Rating Found </Card.Text>
+											}
+											{
+												omdb.imdbRating!==null
+												&&
+												<ProgressBar striped variant="info" now={omdb.imdbRating*10} label={omdb.imdbRating*10}/>
+											}
+											{
+												omdb.imdbRating===null
+												&&
+												<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+											}
+											  </Tab>
+											  <Tab eventKey="showInfo" title="Show Info">
+											   {
+												   omdb.Rated!==null
+												   &&
+												   <Card.Text> {omdb.Rated} </Card.Text>
+											   }
+											   {
+												   omdb.Rated===null
+												   &&
+												   <Card.Text className="text-center"> No Rating Found </Card.Text>
+											   }
+											   {
+												   tvmaze.genres!==null
+												   &&
+												   <Card.Text> {tvmaze.genres} </Card.Text>
+											   }
+											   {
+												   tvmaze.genres===null
+												   &&
+												   <Card.Text className="text-center"> No Genre Found </Card.Text>
+											   }
+											   {
+												   tvmaze.network.name!==null
+												   &&
+												   <Card.Text> {tvmaze.network.name}</Card.Text>
+											   }
+											   {
+												   tvmaze.network.name===null
+												   &&
+												   <Card.Text className="text-center"> No Network Found </Card.Text>
+											   }
+											   {
+												   tvmaze.premiered!==null
+												   &&
+												   <Card.Text> {tvmaze.premiered} </Card.Text>
+											   }
+											   {
+												   tvmaze.premiered===null
+												   &&
+												   <Card.Text className="text-center"> No Premiered Date Found </Card.Text>
+											   }
+											   {
+												   omdb.totalSeasons!==null&&tvmaze._embedded.episodes.length!==null
+												   &&
+												   <Card.Text> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Text>
+											   }
+											   {
+												   omdb.totalSeasons===null&&tvmaze._embedded.episodes.length===null
+												   &&
+												   <Card.Text className="text-center"> No Season Info Found </Card.Text>
+											   }
+											  </Tab>
+											  <Tab eventKey="plot" title="Plot">
+												{
+													omdb.Plot!==null
+													&&
+													<Card.Text> Plot - {omdb.Plot} </Card.Text>
+												}
+												{
+													omdb.Plot===null
+													&&
+													<Card.Text className="text-center"> {tvmaze.summary} </Card.Text>
+												}
+											  </Tab>
+										</Tabs>
+									</Card.Body>
 								</Card>
+
 							}
+
+
+
 						</Col>
 					</Row>
 				</Container>

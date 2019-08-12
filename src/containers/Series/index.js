@@ -3,7 +3,7 @@ import SeriesList from '../../components/SeriesList';
 import Loader from '../../components/Loader';
 import Intro from '../../components/intro';
 import { Container, Row, Col } from 'react-bootstrap'
-
+import Logo from "../../assets/logo.png"
 class Series extends Component{
 	state = {
 		series: [],
@@ -25,7 +25,7 @@ class Series extends Component{
 				<Container className="mainBox">
 					<Row className="justify-content-md-center text-center">
 						<Col md="auto">
-							<Intro message="Fastest TV Rater"/>
+							<img src={Logo}></img>
 							<input
 		   						value={seriesName}
 		   						type="text"
