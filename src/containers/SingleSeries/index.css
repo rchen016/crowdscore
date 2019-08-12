@@ -1,4 +1,14 @@
 .sSeriesCard{
 	margin: 0 auto;
-	width: 18rem;
+}
+.card-img-top{
+	max-height: 410px;
+}
+
+.tabStyle{
+	margin-bottom: 10px;
+}
+
+.showInfoContent{
+	margin-bottom: 0px;
 }

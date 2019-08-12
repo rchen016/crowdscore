@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SeriesList from '../../components/SeriesList';
 import Loader from '../../components/Loader';
-import Intro from '../../components/intro';
-import { Container, Row, Col } from 'react-bootstrap'
-import Logo from "../../assets/logo.png"
+import { Container, Row, Col } from 'react-bootstrap';
+import Logo from "../../assets/logo.png";
+
 class Series extends Component{
 	state = {
 		series: [],
@@ -25,7 +25,7 @@ class Series extends Component{
 				<Container className="mainBox">
 					<Row className="justify-content-md-center text-center">
 						<Col md="auto">
-							<img src={Logo}></img>
+							<img alt="default" src={Logo}></img>
 							<input
 		   						value={seriesName}
 		   						type="text"
