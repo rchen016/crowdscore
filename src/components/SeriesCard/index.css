@@ -10,6 +10,11 @@
 	font-family: 'Crimson Text', serif;
 }
 
+.nav-link.active{
+	background: #4D4E4F !important;
+	color: white !important;
+}
+
 .showInfoContent{
 	margin-bottom: 0px;
 }

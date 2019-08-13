@@ -7,8 +7,8 @@ const Styles = styled.div`
 		background-color: #222;
 		margin-bottom: 55px;
 	}
-	.navbar-brand, .navbar-nav .nav-link{
-		color: #bbb;
+	.navbar-brand, .navbar-nav .nav-link {
+		color: #FFF;
 		&:hover{
 			color: white;
 		}

@@ -99,9 +99,14 @@ const SeriesCard = props => (
 						 <Card.Text className="showInfoContent"> {props.tvmaze.network.name} </Card.Text>
 					   }
 					   {
-						 props.tvmaze.network===null
+						 props.tvmaze.network===null && props.tvmaze.webChannel!==null
 						 &&
-						 <Card.Text className="text-center"> No Network Found </Card.Text>
+						 <Card.Text className="showInfoContent"> {props.tvmaze.webChannel.name} </Card.Text>
+					   }
+					   {
+						   props.tvmaze.network===null && props.tvmaze.webChannel===null
+						   &&
+						    <Card.Text className="text-center"> No Network Found </Card.Text>
 					   }
 					   {
 						 props.tvmaze.premiered!==null
