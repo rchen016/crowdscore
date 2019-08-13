@@ -38,7 +38,7 @@ class Series extends Component{
 							{
 								!isFetching && series.length===0 && seriesName.trim() === ''
 								&&
-								<p> Please enter Series Name </p>
+								<p className="enterDefaultText"> Please enter Series Name </p>
 							}
 							{
 								!isFetching && series.length===0 && seriesName.trim() !== ''
