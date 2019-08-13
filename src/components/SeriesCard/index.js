@@ -64,7 +64,7 @@ const SeriesCard = props => (
 								className="progressBar"
 								striped variant="danger"
 								now={props.tmdb.results[0].vote_average * 10}
-								label={"props.tmdb "+props.tmdb.results[0].vote_average+" ("+props.tmdb.results[0].vote_count+")"}/>
+								label={"TMDB "+props.tmdb.results[0].vote_average+" ("+props.tmdb.results[0].vote_count+")"}/>
 						}
 						{
 							props.tmdb.results[0].vote_count===null
