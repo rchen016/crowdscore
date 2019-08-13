@@ -7,6 +7,7 @@
 
 .tabStyle{
 	margin-bottom: 10px;
+	font-family: 'Crimson Text', serif;
 }
 
 .showInfoContent{
@@ -15,6 +16,7 @@
 
 .progressBar{
 	margin-bottom: 5px;
+	font-family: 'Work Sans', sans-serif;
 }
 
 nav a{
@@ -23,4 +25,12 @@ nav a{
 
 .tvRated{
 	font-size: .95rem;
+}
+
+.titleFont{
+	font-family: 'Crimson Text', serif;
+}
+
+.tabFont{
+	font-family: 'Work Sans', sans-serif;
 }

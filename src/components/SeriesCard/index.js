@@ -19,12 +19,12 @@ const SeriesCard = props => (
 			{
 				props.tvmaze.name!==null
 				&&
-				<Card.Title className="text-center"> {props.tvmaze.name} </Card.Title>
+				<Card.Title className="text-center titleFont"> <strong> {props.tvmaze.name} </strong> </Card.Title>
 			}
 			{
 				props.tvmaze.name===null
 				&&
-				<Card.Title className="text-center"> No Title Found </Card.Title>
+				<Card.Title className="text-center titleFont"> No Title Found </Card.Title>
 			}
 			<Tabs className="tabStyle" defaultActiveKey="rating" id="singleSeriesTabs">
 				<Tab eventKey="rating" title="Rating">
@@ -72,11 +72,11 @@ const SeriesCard = props => (
 							<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 						}
 				  </Tab>
-				  <Tab eventKey="showInfo" title="Show Info">
+				  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
 					   {
 						   props.omdb.Rated!==null
 						   &&
-						   <Card.Title className="showInfoContent tvRated"> {props.omdb.Rated} </Card.Title>
+						   <Card.Title className="showInfoContent tvRated"> <strong>{props.omdb.Rated}</strong> </Card.Title>
 					   }
 					   {
 						   props.omdb.Rated===null
@@ -124,7 +124,7 @@ const SeriesCard = props => (
 						 <Card.Text className="text-center"> No Season Info Found </Card.Text>
 					   }
 				  </Tab>
-				  <Tab eventKey="plot" title="Plot">
+				  <Tab eventKey="plot" className="tabFont" title="Plot">
 						{
 							props.omdb.Plot!==null
 							&&
@@ -136,7 +136,7 @@ const SeriesCard = props => (
 							<Card.Text className="text-center"> {props.tvmaze.summary} </Card.Text>
 						}
 				  </Tab>
-				  <Tab eventKey="cast" title="Cast">
+				  <Tab eventKey="cast" className="tabFont" title="Cast">
 					  {
 						  props.omdb.Actors!==null
 						  &&
