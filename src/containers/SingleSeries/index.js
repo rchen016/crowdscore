@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, ProgressBar, Tab, Tabs  } from 'react-bootstrap';
-
-import defaultLogo from '../../assets/default.jpg';
-import SeriesCard  from '../../components/Card';
+import { Container, Row, Col  } from 'react-bootstrap';
+import SeriesCard  from '../../components/SeriesCard';
 
 class SingleSeries extends Component{
 	state = {

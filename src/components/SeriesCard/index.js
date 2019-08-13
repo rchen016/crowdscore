@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, ProgressBar, Tab, Tabs  } from 'react-bootstrap';
+import { Card, ProgressBar, Tab, Tabs  } from 'react-bootstrap';
 import defaultLogo from '../../assets/default.jpg';
 import './index.css';
 
