@@ -16,37 +16,33 @@ class SingleSeries extends Component{
 			.then(
 					json => {
 						console.log(json);
-					if(json===null) this.setState( { tvmaze: null });
-					else
-					{
 						this.setState( { tvmaze: json });
 						fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
-						.then((response) => response.json())
+						.then( (response) => response.json() )
 						.then(
 							json =>{
+								console.log("OMDB");
 								console.log(json);
-								if(json===null) this.setState( { omdb: null });
-								else this.setState( { omdb: json });
+								this.setState( { omdb: json } );
 								fetch(`https://api.themoviedb.org/3/search/tv?api_key=c668e9ba0082ada9bd8061d745ade430&language=en-US&query=${this.state.tvmaze.name}`)
 								.then( (response) => response.json() )
 								.then( json =>{
-										console.log(json.results[0]);
-										this.setState( { tmdb: json.results[0]} );
+										console.log(json);
+										this.setState( { tmdb: json } );
 									}
 								)
 							}
 						);
-					}
 				});
 	}
 
 	render(){
 		const { tvmaze } = this.state;
 		const { omdb } = this.state;
-		const { tmdb } = this.state;
+	 	const { tmdb } = this.state;
 		return(
 			<React.Fragment>
-				{ tvmaze===null && omdb===null && tmdb===null}
+				{ tvmaze===null && omdb===null && tmdb===null }
 				<Container>
 					<Row>
 						<Col>
@@ -111,20 +107,19 @@ class SingleSeries extends Component{
 														<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 													}
 													{
-														tmdb.vote_count!==null
+														tmdb.results[0].vote_count!==null
 														&&
 														<ProgressBar
 															className="progressBar"
 															striped variant="danger"
-															now={tmdb.vote_average * 10}
-															label={"TMDB "+tmdb.vote_average+" ("+tmdb.vote_count+")"}/>
+															now={tmdb.results[0].vote_average * 10}
+															label={"TMDB "+tmdb.results[0].vote_average+" ("+tmdb.results[0].vote_count+")"}/>
 													}
 													{
-														tmdb.vote_count===null
+														tmdb.results[0].vote_count===null
 														&&
 														<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 													}
-
 											  </Tab>
 											  <Tab eventKey="showInfo" title="Show Info">
 												   {
@@ -138,44 +133,44 @@ class SingleSeries extends Component{
 													   <Card.Text className="text-center"> No Rating Found </Card.Text>
 												   }
 												   {
-													   tvmaze.genres!==null
-													   &&
-													   <Card.Text className="showInfoContent"> {tvmaze.genres} </Card.Text>
+												  	 omdb.Genre!==null
+												  	 &&
+												  	 <Card.Text className="showInfoContent"> {omdb.Genre} </Card.Text>
 												   }
 												   {
-													   tvmaze.genres===null
-													   &&
-													   <Card.Text className="text-center"> No Genre Found </Card.Text>
+												  	 omdb.Genre===null
+												  	 &&
+												  	 <Card.Text className="text-center"> No Genre Found </Card.Text>
 												   }
 												   {
-													   tvmaze.network.name!==null
-													   &&
-													   <Card.Text className="showInfoContent"> {tvmaze.network.name}</Card.Text>
+												  	 tvmaze.network!==null
+												  	 &&
+												  	 <Card.Text className="showInfoContent"> {tvmaze.network.name} </Card.Text>
 												   }
 												   {
-													   tvmaze.network.name===null
-													   &&
-													   <Card.Text className="text-center"> No Network Found </Card.Text>
+												  	 tvmaze.network===null
+												  	 &&
+												  	 <Card.Text className="text-center"> No Network Found </Card.Text>
 												   }
 												   {
-													   tvmaze.premiered!==null
-													   &&
-													   <Card.Text className="showInfoContent"> {tvmaze.premiered} </Card.Text>
+												  	 tvmaze.premiered!==null
+												  	 &&
+												  	 <Card.Text className="showInfoContent"> {tvmaze.premiered} </Card.Text>
 												   }
 												   {
-													   tvmaze.premiered===null
-													   &&
-													   <Card.Text className="text-center"> No Premiered Date Found </Card.Text>
+												  	 tvmaze.premiered===null
+												  	 &&
+												  	 <Card.Text className="text-center"> No Premiered Date Found </Card.Text>
 												   }
 												   {
-													   omdb.totalSeasons!==null&&tvmaze._embedded.episodes.length!==null
-													   &&
-													   <Card.Text className="showInfoContent"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Text>
+												  	 omdb.totalSeasons!==null&&tvmaze._embedded.episodes.length!==null
+												  	 &&
+												  	 <Card.Text className="showInfoContent"> S:{omdb.totalSeasons}E:{tvmaze._embedded.episodes.length} </Card.Text>
 												   }
 												   {
-													   omdb.totalSeasons===null&&tvmaze._embedded.episodes.length===null
-													   &&
-													   <Card.Text className="text-center"> No Season Info Found </Card.Text>
+												  	 omdb.totalSeasons===null&&tvmaze._embedded.episodes.length===null
+												  	 &&
+												  	 <Card.Text className="text-center"> No Season Info Found </Card.Text>
 												   }
 											  </Tab>
 											  <Tab eventKey="plot" title="Plot">
