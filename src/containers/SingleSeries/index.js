@@ -18,7 +18,7 @@ class SingleSeries extends Component{
 			.then(
 					json => {
 						console.log(json);
-						this.setState( { tvmaze: json, tvmaze2: json });
+						this.setState( { tvmaze: json } );
 						fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
 						.then( (response) => response.json() )
 						.then(
@@ -40,12 +40,11 @@ class SingleSeries extends Component{
 
 	render(){
 		const { tvmaze } = this.state;
-		const { tvmaze2 } = this.state;
 		const { omdb } = this.state;
 	 	const { tmdb } = this.state;
 		return(
 			<React.Fragment>
-				{ tvmaze===null && omdb===null && tmdb===null && tvmaze2===null}
+				{ tvmaze===null && omdb===null && tmdb===null}
 				<Container>
 					<Row>
 						<Col>
@@ -58,7 +57,7 @@ class SingleSeries extends Component{
 								&&
 								<SeriesCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb}/>
 							}
-							<EpisodeList blah={tvmaze}/>
+							<EpisodeList tvmaze={tvmaze}/>
 						</Col>
 					</Row>
 				</Container>

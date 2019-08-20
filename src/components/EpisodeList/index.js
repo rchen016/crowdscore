@@ -1,6 +1,7 @@
 import React from 'react';
 import "./index.css";
 import { Accordion, Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 function getEpisodeNames( mainList, store ){
 	for (var key in mainList){
@@ -8,13 +9,17 @@ function getEpisodeNames( mainList, store ){
 		var obj = mainList[key];
 		for (var prop in obj){
 			if(!obj.hasOwnProperty(prop)) continue;
-			store.push(<li key={prop}>{obj[prop].name}</li>);
+			store.push(
+				<Link key={obj[prop].id} to={`/episode/${obj[prop].id}`}>
+					<li>{obj[prop].name}</li>
+				</Link>
+			);
 		}
 	}
 }
 
 const EpisodeList = (props) => {
-	let epiList = ((props.blah || [])._embedded || []);
+	let epiList = ((props.tvmaze || [])._embedded || []);
 	let epiListNames = [];
 	getEpisodeNames(epiList,epiListNames);
 
@@ -27,7 +32,7 @@ const EpisodeList = (props) => {
 					</Accordion.Toggle>
 				</Card.Header>
 				<Accordion.Collapse eventKey="0">
-					<Card.Body>{epiListNames}<br/></Card.Body>
+					<Card.Body>{epiListNames}</Card.Body>
 				</Accordion.Collapse>
 				</Card>
 				<Card>
@@ -43,5 +48,4 @@ const EpisodeList = (props) => {
 		</Accordion>
 	)
 }
-
 export default EpisodeList;
