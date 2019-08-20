@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Row, Col  } from 'react-bootstrap';
 import SeriesCard  from '../../components/SeriesCard';
+import EpisodeList from '../../components/EpisodeList';
 
 class SingleSeries extends Component{
 	state = {
 		tvmaze: null,
 		omdb: null,
-		tmdb: null
+		tmdb: null,
+		tvmaze2: null
 	}
 
 	componentDidMount(){
@@ -16,7 +18,7 @@ class SingleSeries extends Component{
 			.then(
 					json => {
 						console.log(json);
-						this.setState( { tvmaze: json });
+						this.setState( { tvmaze: json, tvmaze2: json });
 						fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
 						.then( (response) => response.json() )
 						.then(
@@ -27,7 +29,7 @@ class SingleSeries extends Component{
 								fetch(`https://api.themoviedb.org/3/search/tv?api_key=c668e9ba0082ada9bd8061d745ade430&language=en-US&query=${this.state.tvmaze.name}`)
 								.then( (response) => response.json() )
 								.then( json =>{
-										console.log(json);
+										console.log(typeof json);
 										this.setState( { tmdb: json } );
 									}
 								)
@@ -38,11 +40,12 @@ class SingleSeries extends Component{
 
 	render(){
 		const { tvmaze } = this.state;
+		const { tvmaze2 } = this.state;
 		const { omdb } = this.state;
 	 	const { tmdb } = this.state;
 		return(
 			<React.Fragment>
-				{ tvmaze===null && omdb===null && tmdb===null }
+				{ tvmaze===null && omdb===null && tmdb===null && tvmaze2===null}
 				<Container>
 					<Row>
 						<Col>
@@ -55,10 +58,14 @@ class SingleSeries extends Component{
 								&&
 								<SeriesCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb}/>
 							}
+							<EpisodeList blah={tvmaze}/>
 						</Col>
 					</Row>
 				</Container>
 			</React.Fragment>
+
+
+
 		)
 	}
 }
