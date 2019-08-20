@@ -7,8 +7,7 @@ class SingleSeries extends Component{
 	state = {
 		tvmaze: null,
 		omdb: null,
-		tmdb: null,
-		tvmaze2: null
+		tmdb: null
 	}
 
 	componentDidMount(){
@@ -62,9 +61,6 @@ class SingleSeries extends Component{
 					</Row>
 				</Container>
 			</React.Fragment>
-
-
-
 		)
 	}
 }
