@@ -40,7 +40,7 @@ const EpisodeCard = props => {
 			{
 				props.tvmaze.summary!==null
 				&&
-				props.tvmaze.summary.substring(3,props.tvmaze.summary.length-4)
+				props.tvmaze.summary.replace(/<p>/g,'').replace(/<\/p>/g,'')
 			}
 			</Card.Body>
 		</Card>
