@@ -45,8 +45,8 @@ class SingleSeries extends Component{
 			<React.Fragment>
 				{ tvmaze===null && omdb===null && tmdb===null}
 				<Container>
-					<Row>
-						<Col>
+					<Row className="justify-content-md-center">
+						<Col lg="5">
 							{
 								tvmaze!==null
 								&&

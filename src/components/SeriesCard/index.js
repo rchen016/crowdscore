@@ -67,7 +67,7 @@ const SeriesCard = props => (
 								label={"TMDB "+props.tmdb.results[0].vote_average+" ("+props.tmdb.results[0].vote_count+")"}/>
 						}
 						{
-							props.tmdb.results[0].vote_count===null
+							props.tmdb.results[0].vote_coun===null
 							&&
 							<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 						}

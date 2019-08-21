@@ -25,7 +25,7 @@ class Series extends Component{
 			<React.Fragment>
 				<Container className="mainBox">
 					<Row className="justify-content-md-center text-center">
-						<Col md="auto">
+						<Col lg="4" md="auto">
 							<img alt="default" src={Logo}></img>
 							<input
 		   						value={seriesName}

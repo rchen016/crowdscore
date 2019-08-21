@@ -22,8 +22,8 @@ class SingleEpisode extends Component{
 		return(
 			<React.Fragment>
 				<Container>
-					<Row>
-						<Col>
+					<Row className="justify-content-md-center">
+						<Col lg="5">
 							{
 								tvmaze!==null
 								&&
