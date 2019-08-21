@@ -1,15 +1,9 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import defaultLogo from '../../assets/default.jpg';
+import "./index.css";
 
 const EpisodeCard = props => {
-	let epiInfo = (props.tvmaze || []).id;
-	console.log("id: "+epiInfo);
-	let summaryStyle={
-		backgroundColor: "#EDEDED",
-		marginTop: '10px'
-	};
-
 	return(
 
 		<Card>
@@ -33,19 +27,19 @@ const EpisodeCard = props => {
 			{
 				props.tvmaze.number!==null
 				&&
-				<span><strong>Episode: {props.tvmaze.number}</strong></span>
+				<span className="mainTextFont">Episode: {props.tvmaze.number}</span>
 			}
 			<br />
 			{
 				props.tvmaze.airdate!==null
 				&&
-				<span>Airdate: {props.tvmaze.airdate}</span>
+				<span className="mainTextFont">Airdate: {props.tvmaze.airdate}</span>
 			}
 			<br />
 			{
 				props.tvmaze.summary!==null
 				&&
-				<div style={summaryStyle}>{props.tvmaze.summary.replace(/<p>/g,'').replace(/<\/p>/g,'')}</div>
+				<div className="summaryText"> {props.tvmaze.summary.replace(/<p>/g,'').replace(/<\/p>/g,'')} </div>
 
 			}
 			</Card.Body>

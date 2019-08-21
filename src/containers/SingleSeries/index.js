@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Row, Col  } from 'react-bootstrap';
+import { Container, Row, Col, Button  } from 'react-bootstrap';
 import SeriesCard  from '../../components/SeriesCard';
 import EpisodeList from '../../components/EpisodeList';
+import "./index.css";
 
 class SingleSeries extends Component{
 	state = {
@@ -55,7 +56,7 @@ class SingleSeries extends Component{
 				{ tvmaze===null && omdb===null && tmdb===null}
 				<Container>
 					<Row className="justify-content-md-center">
-						<div onClick={this.goBack}>Back</div>
+						<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 						<Col lg="5">
 							{
 								tvmaze!==null
@@ -66,7 +67,11 @@ class SingleSeries extends Component{
 								&&
 								<SeriesCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb}/>
 							}
-							<EpisodeList tvmaze={tvmaze}/>
+							{
+								tvmaze!==null
+								&&
+								<EpisodeList tvmaze={tvmaze}/>
+							}
 						</Col>
 					</Row>
 				</Container>

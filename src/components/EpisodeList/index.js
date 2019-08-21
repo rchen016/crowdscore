@@ -24,7 +24,7 @@ const EpisodeList = (props) => {
 	getEpisodeNames(epiList,epiListNames);
 
 	return(
-		<Accordion>
+		<Accordion className="accordStyle">
 			<Card>
 				<Card.Header>
 					<Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -32,17 +32,22 @@ const EpisodeList = (props) => {
 					</Accordion.Toggle>
 				</Card.Header>
 				<Accordion.Collapse eventKey="0">
-					<Card.Body>{epiListNames}</Card.Body>
+					<Card.Body><ol>{epiListNames}</ol></Card.Body>
 				</Accordion.Collapse>
 				</Card>
 				<Card>
 				<Card.Header>
 					<Accordion.Toggle as={Button} variant="link" eventKey="1">
-					Click me!
+					Sources
 					</Accordion.Toggle>
 				</Card.Header>
 				<Accordion.Collapse eventKey="1">
-					<Card.Body>Hello! I'm another body</Card.Body>
+					<Card.Body>
+						API Source: <br />
+						https://www.tvmaze.com/
+						http://www.omdbapi.com/
+						https://www.themoviedb.org/
+					</Card.Body>
 				</Accordion.Collapse>
 			</Card>
 		</Accordion>

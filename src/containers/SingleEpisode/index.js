@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Row, Col  } from 'react-bootstrap';
+import { Container, Row, Col, Button  } from 'react-bootstrap';
 import EpisodeCard from '../../components/EpisodeCard';
+import "./index.css";
 
 class SingleEpisode extends Component{
 	state = {
@@ -27,11 +28,12 @@ class SingleEpisode extends Component{
 
 	render(){
 		const { tvmaze } = this.state;
+
 		return(
 			<React.Fragment>
 				<Container>
 					<Row className="justify-content-md-center">
-						<div onClick={this.goBack}>Back</div>
+						<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 						<Col lg="5">
 							{
 								tvmaze!==null

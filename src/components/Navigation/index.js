@@ -5,13 +5,16 @@ import styled from 'styled-components';
 const Styles = styled.div`
 	.navbar{
 		background-color: #222;
-		margin-bottom: 55px;
+		margin-bottom: 25px;
 	}
 	.navbar-brand, .navbar-nav .nav-link {
 		color: #FFF;
 		&:hover{
 			color: white;
 		}
+	}
+	.navbar-toggler-icon{
+		
 	}
 `;
 
@@ -21,7 +24,7 @@ export const NavigationBar = () =>(
 			<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="ml-auto">
+				<Nav className="ml-auto navbar-light bg-light">
 					<Nav.Item>
 						<Nav.Link href="/">Login</Nav.Link>
 					</Nav.Item>
