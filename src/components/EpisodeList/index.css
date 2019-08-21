@@ -4,12 +4,12 @@
 
 .card-body a li{
 	color:#222;
-
 }
 
-li{
+.card-body li{
 	list-style-type: none;
 	display: flex;
+	margin-bottom: 10px;
 }
 
 .accordStyle{

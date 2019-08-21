@@ -11,7 +11,17 @@ function getEpisodeNames( mainList, store ){
 			if(!obj.hasOwnProperty(prop)) continue;
 			store.push(
 				<li key={obj[prop].id}>
-					{obj[prop].name}
+					{
+						obj[prop].name.length > 25
+						&&
+						obj[prop].name.substring(0,25) + "..."
+					}
+					{
+						obj[prop].name.length < 25
+						&&
+						obj[prop].name
+					}
+
 					<Link className="epiListLinksItem" key={obj[prop].id} to={`/episode/${obj[prop].id}`}><Button size="sm" variant="outline-dark">View</Button></Link>
 
 				</li>
