@@ -1,0 +1,12 @@
+.titleFont{
+	font-family: 'Crimson Text', serif;
+}
+
+.mainTextFont{
+	font-family: 'Work Sans', sans-serif;
+}
+
+.summaryText{
+	background: #ededed !important;
+	font-family: 'Slabo 27px', serif !important;
+}

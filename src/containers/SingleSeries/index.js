@@ -10,6 +10,15 @@ class SingleSeries extends Component{
 		tmdb: null
 	}
 
+	constructor(props){
+		super(props);
+		this.goBack = this.goBack.bind(this);
+	}
+
+	goBack(){
+		this.props.history.goBack();
+	}
+
 	componentDidMount(){
 		const { id } = this.props.match.params;
 		fetch(`http://api.tvmaze.com/shows/${id}?embed=episodes`)
@@ -46,6 +55,7 @@ class SingleSeries extends Component{
 				{ tvmaze===null && omdb===null && tmdb===null}
 				<Container>
 					<Row className="justify-content-md-center">
+						<div onClick={this.goBack}>Back</div>
 						<Col lg="5">
 							{
 								tvmaze!==null

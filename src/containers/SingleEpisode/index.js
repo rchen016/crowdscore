@@ -7,6 +7,14 @@ class SingleEpisode extends Component{
 		tvmaze: null
 	}
 
+	constructor(props){
+		super(props);
+		this.goBack = this.goBack.bind(this);
+	}
+
+	goBack(){
+		this.props.history.goBack();
+	}
 	componentDidMount(){
 		console.log("Single Epi");
 
@@ -23,6 +31,7 @@ class SingleEpisode extends Component{
 			<React.Fragment>
 				<Container>
 					<Row className="justify-content-md-center">
+						<div onClick={this.goBack}>Back</div>
 						<Col lg="5">
 							{
 								tvmaze!==null

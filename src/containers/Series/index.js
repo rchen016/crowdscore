@@ -26,7 +26,7 @@ class Series extends Component{
 				<Container className="mainBox">
 					<Row className="justify-content-md-center text-center">
 						<Col lg="4" md="auto">
-							<img alt="default" src={Logo}></img>
+							<img className="logoStyle" alt="default" src={Logo}></img>
 							<input
 		   						value={seriesName}
 		   						type="text"

@@ -5,8 +5,13 @@ import defaultLogo from '../../assets/default.jpg';
 const EpisodeCard = props => {
 	let epiInfo = (props.tvmaze || []).id;
 	console.log("id: "+epiInfo);
+	let summaryStyle={
+		backgroundColor: "#EDEDED",
+		marginTop: '10px'
+	};
 
 	return(
+
 		<Card>
 			{
 				props.tvmaze.image!==null
@@ -22,25 +27,26 @@ const EpisodeCard = props => {
 			{
 				props.tvmaze.name!==null
 				&&
-				props.tvmaze.name
+				<div className="text-center titleFont"><strong>{props.tvmaze.name}</strong></div>
 			}
 			<br />
 			{
 				props.tvmaze.number!==null
 				&&
-				`Episode: ${props.tvmaze.number}`
+				<span><strong>Episode: {props.tvmaze.number}</strong></span>
 			}
 			<br />
 			{
 				props.tvmaze.airdate!==null
 				&&
-				`Airdate: ${props.tvmaze.airdate}`
+				<span>Airdate: {props.tvmaze.airdate}</span>
 			}
 			<br />
 			{
 				props.tvmaze.summary!==null
 				&&
-				props.tvmaze.summary.replace(/<p>/g,'').replace(/<\/p>/g,'')
+				<div style={summaryStyle}>{props.tvmaze.summary.replace(/<p>/g,'').replace(/<\/p>/g,'')}</div>
+
 			}
 			</Card.Body>
 		</Card>
