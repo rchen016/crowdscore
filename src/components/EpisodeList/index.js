@@ -10,9 +10,11 @@ function getEpisodeNames( mainList, store ){
 		for (var prop in obj){
 			if(!obj.hasOwnProperty(prop)) continue;
 			store.push(
-				<Link key={obj[prop].id} to={`/episode/${obj[prop].id}`}>
-					<li>{obj[prop].name}</li>
-				</Link>
+				<li key={obj[prop].id}>
+					{obj[prop].name}
+					<Link className="epiListLinksItem" key={obj[prop].id} to={`/episode/${obj[prop].id}`}><Button size="sm" variant="outline-dark">View</Button></Link>
+
+				</li>
 			);
 		}
 	}
@@ -21,6 +23,8 @@ function getEpisodeNames( mainList, store ){
 const EpisodeList = (props) => {
 	let epiList = ((props.tvmaze || [])._embedded || []);
 	let epiListNames = [];
+	console.log("List");
+	console.log(epiList);
 	getEpisodeNames(epiList,epiListNames);
 
 	return(
@@ -32,7 +36,7 @@ const EpisodeList = (props) => {
 					</Accordion.Toggle>
 				</Card.Header>
 				<Accordion.Collapse eventKey="0">
-					<Card.Body><ol>{epiListNames}</ol></Card.Body>
+					<Card.Body>{epiListNames}</Card.Body>
 				</Accordion.Collapse>
 				</Card>
 				<Card>

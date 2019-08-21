@@ -4,8 +4,19 @@
 
 .card-body a li{
 	color:#222;
+
+}
+
+li{
+	list-style-type: none;
+	display: flex;
 }
 
 .accordStyle{
 	margin-bottom: 10%;
+}
+
+.epiListLinksItem{
+	color:#222;
+	margin-left: auto;
 }

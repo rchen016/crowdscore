@@ -33,7 +33,6 @@ const SeriesCard = props => (
 							&&
 							<ProgressBar
 								className="progressBar"
-								striped variant="success"
 								now={props.tvmaze.rating.average*10}
 								label={"TV Maze "+props.tvmaze.rating.average}/>
 
@@ -48,7 +47,6 @@ const SeriesCard = props => (
 							&&
 							<ProgressBar
 								className="progressBar"
-								striped variant="info"
 								now={props.omdb.imdbRating*10}
 								label={"IMDB "+props.omdb.imdbRating+" ("+props.omdb.imdbVotes+")"}/>
 						}
@@ -62,7 +60,6 @@ const SeriesCard = props => (
 							&&
 							<ProgressBar
 								className="progressBar"
-								striped variant="danger"
 								now={props.tmdb.results[0].vote_average * 10}
 								label={"TMDB "+props.tmdb.results[0].vote_average+" ("+props.tmdb.results[0].vote_count+")"}/>
 						}
