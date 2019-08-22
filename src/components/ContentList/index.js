@@ -28,14 +28,13 @@ const ContentList = (props) => {
 	var isMovieMode = props.isMovie;
 
 	if(isMovieMode){
-		console.log("IT's a Movie SeriesList");
 		var movieList = [];
 		extractMovieNames(props,movieList);
 		return(
 			<div>
 				<ul className="contentList">
 					{ movieList.map(data=>(
-						<li key={data}>
+						<li key={data.props.to}>
 							{data}
 						</li>
 					))}

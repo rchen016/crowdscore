@@ -32,8 +32,6 @@ function getEpisodeNames( mainList, store ){
 const EpisodeList = (props) => {
 	let epiList = ((props.tvmaze || [])._embedded || []);
 	let epiListNames = [];
-	console.log("List");
-	console.log(epiList);
 	getEpisodeNames(epiList,epiListNames);
 
 	return(

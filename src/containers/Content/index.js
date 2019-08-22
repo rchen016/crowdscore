@@ -26,7 +26,6 @@ class Content extends Component{
 				.catch( err => console.log(err));
 		}
 		else{
-			console.log("It's a movie search");
 			this.setState({ movieName: e.target.value, isFetching: true});
 			axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
 					.then(res=>{
