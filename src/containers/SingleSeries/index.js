@@ -57,7 +57,7 @@ class SingleSeries extends Component{
 		else{
 			const { id } = this.props.match.params;
 			console.log("Issa Movie", id);
-			fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=c668e9ba0082ada9bd8061d745ade430`)
+			fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=c668e9ba0082ada9bd8061d745ade430&append_to_response=credits`)
 			.then( (response) => response.json() )
 			.then( json =>{
 					console.log(json);

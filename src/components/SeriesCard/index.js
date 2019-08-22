@@ -253,7 +253,20 @@ const SeriesCard = (props) => {
 							}
 						  </Tab>
 						  <Tab eventKey="cast" className="tabFont" title="Cast">
-							 Tab3
+							 {
+								 props.tmdb.credits!==null
+								 &&
+								 <Card.Text className="showInfoContent">
+									{props.tmdb.credits.cast.slice(0,10).map(data=>(
+										<li>{data.name}</li>
+									))}
+								 </Card.Text>
+							 }
+							 {
+								 props.tmdb.credits===null
+								 &&
+								 <Card.Text className="text-center"> No Actor Info Found! </Card.Text>
+							 }
 						  </Tab>
 					</Tabs>
 				</Card.Body>
