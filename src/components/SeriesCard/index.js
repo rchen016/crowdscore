@@ -161,18 +161,96 @@ const SeriesCard = (props) => {
 	else{
 		return(
 			<Card className="sMovieCard">
-				image
+				{
+					props.tmdb.poster_path!==null
+					&&
+					<Card.Img className="text-center" variant="top" src={"http://image.tmdb.org/t/p/w185"+props.tmdb.poster_path} />
+				}
+				{
+					props.tmdb.poster_path===null
+					&&
+					<Card.Img variant="top" src={defaultLogo} />
+				}
 				<Card.Body>
-					Title
+					{
+						props.tmdb.original_title!==null
+						&&
+						<Card.Title className="text-center titleFont"> <strong> {props.tmdb.original_title} </strong> </Card.Title>
+					}
+					{
+						props.tmdb.original_title===null
+						&&
+						<Card.Title className="text-center titleFont"> No Title Found </Card.Title>
+					}
 					<Tabs className="tabStyle" defaultActiveKey="rating" id="singleSeriesTabs">
 						<Tab eventKey="rating" title="Rating">
-								ratings
+								{
+									props.tmdb.vote_count!==null
+									&&
+									<ProgressBar
+										className="progressBar"
+										now={props.tmdb.vote_average * 10}
+										label={"TMDB "+props.tmdb.vote_average+" ("+props.tmdb.vote_count+")"}/>
+								}
+								{
+									props.tmdb.vote_count===null
+									&&
+									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+								}
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
-							   Tab1
+							    {
+ 								   props.tmdb.genres!==null
+ 								   &&
+ 								   <Card.Title className="showInfoContent tvRated"> <strong>{props.tmdb.genres[0].name}</strong> </Card.Title>
+ 							   }
+ 							   {
+ 								    props.tmdb.genres===null
+ 								   &&
+ 								   <Card.Text className="text-center"> No Rating Found </Card.Text>
+ 							   }
+							   {
+								  props.tmdb.release_date!==null
+								  &&
+								  <Card.Title className="showInfoContent tvRated"> {props.tmdb.release_date} </Card.Title>
+							  }
+							  {
+								   props.tmdb.release_date===null
+								  &&
+								  <Card.Text className="text-center"> No Rating Found </Card.Text>
+							  }
+							  {
+								 props.tmdb.budget!==null
+								 &&
+								 <Card.Title className="showInfoContent tvRated"> {"Budget: $"+props.tmdb.budget} </Card.Title>
+							 }
+							 {
+								  props.tmdb.budget===null
+								 &&
+								 <Card.Text className="text-center"> No Rating Found </Card.Text>
+							 }
+							 {
+								props.tmdb.status!==null
+								&&
+								<Card.Title className="showInfoContent tvRated"> {"Status: "+props.tmdb.status} </Card.Title>
+							}
+							{
+								 props.tmdb.status===null
+								&&
+								<Card.Text className="text-center"> No Rating Found </Card.Text>
+							}
 						  </Tab>
 						  <Tab eventKey="plot" className="tabFont" title="Plot">
-							Tab2
+							{
+								props.tmdb.overview!==null
+								&&
+								<Card.Text className="showInfoContent"> {props.tmdb.overview} </Card.Text>
+							}
+							{
+								props.tmdb.overview===null
+								&&
+								<Card.Text className="text-center"> Nothing Found! </Card.Text>
+							}
 						  </Tab>
 						  <Tab eventKey="cast" className="tabFont" title="Cast">
 							 Tab3
