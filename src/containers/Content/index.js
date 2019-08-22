@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import SeriesList from '../../components/SeriesList';
+import ContentList from '../../components/ContentList';
 import Loader from '../../components/Loader';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from "../../assets/logo.png";
 import './index.css';
 import axios from 'axios'
 
-class Series extends Component{
+class Content extends Component{
 	state = {
 		series: [],
 		seriesName: '',
@@ -16,7 +16,7 @@ class Series extends Component{
 		movieName: ''
 	}
 
-	onSeriesInputChange = e =>{
+	onContentInputChange = e =>{
 		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
 			this.setState({ seriesName: e.target.value, isFetching: true});
@@ -53,7 +53,7 @@ class Series extends Component{
 								<input
 			   						value={movieName}
 			   						type="text"
-			   						onChange={this.onSeriesInputChange} />
+			   						onChange={this.onContentInputChange} />
 							}
 							{
 								!isMovieSearch
@@ -61,7 +61,7 @@ class Series extends Component{
 								<input
 			   						value={seriesName}
 			   						type="text"
-			   						onChange={this.onSeriesInputChange} />
+			   						onChange={this.onContentInputChange} />
 							}
 
 						</Col>
@@ -93,10 +93,10 @@ class Series extends Component{
 								isFetching && <Loader />
 							}
 							{
-								!isFetching && isMovieSearch && <SeriesList list={this.state.movie} isMovie={isMovieSearch}/>
+								!isFetching && isMovieSearch && <ContentList list={this.state.movie} isMovie={isMovieSearch}/>
 							}
 							{
-								!isFetching && !isMovieSearch && <SeriesList list={this.state.series} isMovie={isMovieSearch}/>
+								!isFetching && !isMovieSearch && <ContentList list={this.state.series} isMovie={isMovieSearch}/>
 							}
 						</Col>
 					</Row>
@@ -108,4 +108,4 @@ class Series extends Component{
 	}
 }
 
-export default Series;
+export default Content;

@@ -3,7 +3,7 @@ import { Card, ProgressBar, Tab, Tabs  } from 'react-bootstrap';
 import defaultLogo from '../../assets/default.jpg';
 import './index.css';
 
-const SeriesCard = (props) => {
+const ContentCard = (props) => {
 
 	if(props.searchMode==="series"){
 		return(
@@ -276,4 +276,4 @@ const SeriesCard = (props) => {
 
 }
 
-export default SeriesCard;
+export default ContentCard;

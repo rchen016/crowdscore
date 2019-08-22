@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button  } from 'react-bootstrap';
-import SeriesCard  from '../../components/SeriesCard';
+import ContentCard  from '../../components/ContentCard';
 import EpisodeList from '../../components/EpisodeList';
 import "./index.css";
 
-class SingleSeries extends Component{
+class SingleContent extends Component{
 	state = {
 		tvmaze: null,
 		omdb: null,
@@ -89,7 +89,7 @@ class SingleSeries extends Component{
 									&&
 									tmdb!==null
 									&&
-									<SeriesCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb} searchMode={searchMode}/>
+									<ContentCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb} searchMode={searchMode}/>
 								}
 								{
 									tvmaze!==null
@@ -113,7 +113,7 @@ class SingleSeries extends Component{
 								{
 									tmdb!==null
 									&&
-									<SeriesCard tmdb={tmdb}/>
+									<ContentCard tmdb={tmdb}/>
 								}
 							</Col>
 						</Row>
@@ -126,4 +126,4 @@ class SingleSeries extends Component{
 	}
 }
 
-export default SingleSeries;
+export default SingleContent;

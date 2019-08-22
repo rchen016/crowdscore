@@ -23,7 +23,7 @@ function extractMovieNames(props,store){
 	}
 }
 
-const SeriesList = (props) => {
+const ContentList = (props) => {
 
 	var isMovieMode = props.isMovie;
 
@@ -35,7 +35,7 @@ const SeriesList = (props) => {
 			<div>
 				<ul className="contentList">
 					{ movieList.map(data=>(
-						<li>
+						<li key={data}>
 							{data}
 						</li>
 					))}
@@ -56,4 +56,4 @@ const SeriesList = (props) => {
 	}
 }
 
-export default SeriesList;
+export default ContentList;
