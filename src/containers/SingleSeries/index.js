@@ -43,7 +43,8 @@ class SingleSeries extends Component{
 									}
 								)
 							}
-						);
+						)
+						.catch( err => console.log(err));
 				});
 	}
 

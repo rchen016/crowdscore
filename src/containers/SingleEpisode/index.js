@@ -23,7 +23,8 @@ class SingleEpisode extends Component{
 		console.log(id);
 		fetch(`http://api.tvmaze.com/episodes/${id}`)
 			.then( (response) => response.json() )
-			.then(json => {this.setState( { tvmaze: json } ); console.log(json);});
+			.then(json => {this.setState( { tvmaze: json } ); console.log(json);})
+			.catch( err => console.log(err));
 	}
 
 	render(){
