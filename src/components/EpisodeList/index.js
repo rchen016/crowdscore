@@ -4,6 +4,7 @@ import { Accordion, Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 function getEpisodeNames( mainList, store ){
+	//Extract Episode Names from JSON from API
 	for (var key in mainList){
 		if(!mainList.hasOwnProperty(key)) continue;
 		var obj = mainList[key];
@@ -21,9 +22,7 @@ function getEpisodeNames( mainList, store ){
 						&&
 						obj[prop].name
 					}
-
 					<Link className="epiListLinksItem" key={obj[prop].id} to={`/episode/${obj[prop].id}`}><Button size="sm" variant="outline-dark">View</Button></Link>
-
 				</li>
 			);
 		}

@@ -17,6 +17,7 @@ class Series extends Component{
 	}
 
 	onSeriesInputChange = e =>{
+		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
 			this.setState({ seriesName: e.target.value, isFetching: true});
 			fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
@@ -27,8 +28,9 @@ class Series extends Component{
 		else{
 			console.log("It's a movie search");
 			this.setState({ movieName: e.target.value, isFetching: true});
-			axios.get(`https://api.themoviedb.org/3/search/tv?api_key=c668e9ba0082ada9bd8061d745ade430&language=en-US&query=${e.target.value}`)
+			axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
 					.then(res=>{
+						console.log("res: ", res.data.results);
 						const movie = res.data;
 						this.setState({ movie, isFetching:false });
 						console.log(movie.results);

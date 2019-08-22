@@ -1,6 +1,10 @@
 .sSeriesCard{
 	margin: 0 auto;
 }
+
+.sMovieCard{
+	margin: 0 auto;
+}
 .card-img-top{
 	max-height: 410px;
 }

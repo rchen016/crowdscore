@@ -18,9 +18,9 @@ class SingleEpisode extends Component{
 	}
 	componentDidMount(){
 		console.log("Single Epi");
-
 		const { id } = this.props.match.params;
 		console.log(id);
+		//Fetch Single Episode to pass to Episode Card Component
 		fetch(`http://api.tvmaze.com/episodes/${id}`)
 			.then( (response) => response.json() )
 			.then(json => {this.setState( { tvmaze: json } ); console.log(json);})

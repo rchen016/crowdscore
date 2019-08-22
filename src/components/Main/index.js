@@ -9,6 +9,7 @@ const Main = props => (
 		<Route exact path="/" component={Series} />
 		<Route path="/series/:id" component={SingleSeries} />
 		<Route path="/episode/:id" component={SingleEpisode} />
+		<Route path="/movie/:id" component={SingleSeries} />
 		<Route path="/:" component={Series} />
 	</Switch>
 )

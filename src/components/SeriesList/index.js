@@ -11,11 +11,14 @@ const SeriesListItem = ({series}) => (
 )
 
 function extractMovieNames(props,store){
+	//Extract the Movie Names only
 	for(var key in props.list.results){
 		if(!props.list.results.hasOwnProperty(key)) continue;
 		var obj = props.list.results[key];
 		store.push(
-			obj.original_name
+			<Link to={`/movie/${obj.id}`}>
+				{obj.original_title}
+			</Link>
 		);
 	}
 }
@@ -25,12 +28,17 @@ const SeriesList = (props) => {
 	var isMovieMode = props.isMovie;
 
 	if(isMovieMode){
+		console.log("IT's a Movie SeriesList");
 		var movieList = [];
 		extractMovieNames(props,movieList);
 		return(
 			<div>
-				<ul>
-					{movieList}
+				<ul className="contentList">
+					{ movieList.map(data=>(
+						<li>
+							{data}
+						</li>
+					))}
 				</ul>
 			</div>
 		)
@@ -38,7 +46,7 @@ const SeriesList = (props) => {
 	else{
 		return(
 			<div>
-				<ul className="seriesList">
+				<ul className="contentList">
 					{ props.list.map(series => (
 						<SeriesListItem key={series.show.id } series={series}/>
 					))}
