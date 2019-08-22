@@ -4,7 +4,7 @@ import Loader from '../../components/Loader';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from "../../assets/logo.png";
 import './index.css';
-import axios from 'axios'
+import axios from 'axios';
 
 class Content extends Component{
 	state = {
@@ -29,11 +29,10 @@ class Content extends Component{
 			this.setState({ movieName: e.target.value, isFetching: true});
 			axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
 					.then(res=>{
-						console.log("res: ", res.data.results);
 						const movie = res.data;
 						this.setState({ movie, isFetching:false });
-						console.log(movie.results);
-					});
+					})
+					.catch( err => console.log(err));
 		}
 
 	}
@@ -45,6 +44,7 @@ class Content extends Component{
 				<Container className="mainBox">
 					<Row className="justify-content-md-center text-center">
 						<Col lg="4" md="auto">
+
 							<img className="logoStyle" alt="default" src={Logo}></img>
 							{
 								isMovieSearch

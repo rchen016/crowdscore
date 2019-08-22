@@ -64,6 +64,7 @@ class SingleContent extends Component{
 					this.setState( { tmdb: json } );
 				}
 			)
+			.catch( err => console.log(err));
 
 		}
 	}
