@@ -258,7 +258,7 @@ const ContentCard = (props) => {
 								 &&
 								 <Card.Text className="showInfoContent">
 									{props.tmdb.credits.cast.slice(0,10).map(data=>(
-										<li>{data.name}</li>
+										<li key={data.name}>{data.name}</li>
 									))}
 								 </Card.Text>
 							 }
