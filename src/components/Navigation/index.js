@@ -8,13 +8,16 @@ const Styles = styled.div`
 		margin-bottom: 25px;
 	}
 	.navbar-brand, .navbar-nav .nav-link {
-		color: #FFF;
 		&:hover{
 			color: white;
 		}
 	}
-	.navbar-toggler-icon{
-		
+	a.nav-link{
+		background: #222;
+		color: #FFF !important;
+	}
+	a.titleFont{
+		color: #FFF;
 	}
 `;
 
@@ -24,7 +27,7 @@ export const NavigationBar = () =>(
 			<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="ml-auto navbar-light bg-light">
+				<Nav className="ml-auto">
 					<Nav.Item>
 						<Nav.Link href="/">Login</Nav.Link>
 					</Nav.Item>

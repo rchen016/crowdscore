@@ -197,6 +197,19 @@ const ContentCard = (props) => {
 									&&
 									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
 								}
+								{
+									props.omdb.imdbRating!==null
+									&&
+									<ProgressBar
+										className="progressBar"
+										now={props.omdb.imdbRating*10}
+										label={"IMDB "+props.omdb.imdbRating+" ("+props.omdb.imdbVotes+")"}/>
+								}
+								{
+									props.omdb.imdbRating===null
+									&&
+									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+								}
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
 							    {

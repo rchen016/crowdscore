@@ -62,6 +62,9 @@ class SingleContent extends Component{
 			.then( json =>{
 					console.log(json);
 					this.setState( { tmdb: json } );
+					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
+					.then( (response) => response.json() )
+					.then( json =>this.setState( { omdb: json }))
 				}
 			)
 			.catch( err => console.log(err));
@@ -106,7 +109,7 @@ class SingleContent extends Component{
 		else{
 			return(
 				<React.Fragment>
-					{ tmdb===null }
+					{ tmdb===null && omdb===null }
 					<Container>
 						<Row className="justify-content-md-center">
 							<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
@@ -114,7 +117,9 @@ class SingleContent extends Component{
 								{
 									tmdb!==null
 									&&
-									<ContentCard tmdb={tmdb}/>
+									omdb!==null
+									&&
+									<ContentCard tmdb={tmdb} omdb={omdb}/>
 								}
 							</Col>
 						</Row>
