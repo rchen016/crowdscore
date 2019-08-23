@@ -7,18 +7,26 @@ import './index.css';
 import axios from 'axios';
 
 class Content extends Component{
-	state = {
-		series: [],
-		seriesName: '',
-		isFetching: false,
-		isMovieSearch: true,
-		movie: [],
-		movieName: ''
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			series: [],
+			seriesName: '',
+			isFetching: false,
+			isMovieSearch: true,
+			movie: [],
+			movieName: ''
+		}
+		this.onLogoClick = this.onLogoClick.bind(this);
 	}
+
+
 
 	onContentInputChange = e =>{
 		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
+			console.log("Series Query");
 			this.setState({ seriesName: e.target.value, isFetching: true});
 			fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
 				.then( (response) => response.json() )
@@ -26,15 +34,27 @@ class Content extends Component{
 				.catch( err => console.log(err));
 		}
 		else{
-			this.setState({ movieName: e.target.value, isFetching: true});
-			axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
-					.then(res=>{
-						const movie = res.data;
-						this.setState({ movie, isFetching:false });
-					})
-					.catch( err => console.log(err));
+			console.log("Movie Query");
+			if(e.target.value!==''){
+				this.setState({ movieName: e.target.value, isFetching: true});
+				axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
+						.then(res=>{
+							const movie = res.data;
+							this.setState({ movie, isFetching:false });
+						})
+						.catch( err => console.log(err));
+			}
+			else{
+				this.setState({ movieName: e.target.value, isFetching: false, movie:''});
+			}
 		}
+	}
 
+	onLogoClick = () =>{
+		var toggle = !this.state.isMovieSearch;
+		this.setState( ()=>{
+			return { isMovieSearch:toggle }
+		});
 	}
 
 	render(){
@@ -45,7 +65,7 @@ class Content extends Component{
 					<Row className="justify-content-md-center text-center">
 						<Col lg="4" md="auto">
 
-							<img className="logoStyle" alt="default" src={Logo}></img>
+							<img className="logoStyle" alt="default" onClick={this.onLogoClick} src={Logo}></img>
 							{
 								isMovieSearch
 								&&
