@@ -82,9 +82,10 @@ class SingleContent extends Component{
 			return(
 				<React.Fragment>
 					{ tvmaze===null && omdb===null && tmdb===null}
+					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 					<Container>
 						<Row className="justify-content-md-center">
-							<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
+
 							<Col lg="5">
 								{
 									tvmaze!==null

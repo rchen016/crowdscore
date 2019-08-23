@@ -14,6 +14,9 @@ const Styles = styled.div`
 			color: white;
 		}
 	}
+	.fixed-bottom{
+		z-index: -1000000;
+	}
 `;
 
 export const Footer = () =>(
