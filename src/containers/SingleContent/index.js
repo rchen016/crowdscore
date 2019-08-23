@@ -3,13 +3,16 @@ import { Container, Row, Col, Button  } from 'react-bootstrap';
 import ContentCard  from '../../components/ContentCard';
 import EpisodeList from '../../components/EpisodeList';
 import "./index.css";
+import Loader from "../../components/Loader";
+import loaderSrc from '../../assets/loader.gif';
 
 class SingleContent extends Component{
 	state = {
 		tvmaze: null,
 		omdb: null,
 		tmdb: null,
-		searchMode: null
+		searchMode: null,
+		isFetching: null
 	}
 
 	constructor(props){
@@ -29,6 +32,7 @@ class SingleContent extends Component{
 		if( this.props.location.pathname.split("/")[1] === "series" ){
 			const { id } = this.props.match.params;
 			console.log("Issa Series");
+			this.setState({ isFetching: true});
 			fetch(`http://api.tvmaze.com/shows/${id}?embed=episodes`)
 				.then( (response) => response.json() )
 				.then(
@@ -46,7 +50,7 @@ class SingleContent extends Component{
 									.then( (response) => response.json() )
 									.then( json =>{
 											console.log(typeof json);
-											this.setState( { tmdb: json } );
+											this.setState( { tmdb: json, isFetching: false } );
 										}
 									)
 								}
@@ -57,6 +61,7 @@ class SingleContent extends Component{
 		else{
 			const { id } = this.props.match.params;
 			console.log("Issa Movie", id);
+			this.setState({ isFetching: true});
 			fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=c668e9ba0082ada9bd8061d745ade430&append_to_response=credits`)
 			.then( (response) => response.json() )
 			.then( json =>{
@@ -64,7 +69,7 @@ class SingleContent extends Component{
 					this.setState( { tmdb: json } );
 					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
 					.then( (response) => response.json() )
-					.then( json =>this.setState( { omdb: json }))
+					.then( json =>this.setState( { omdb: json, isFetching: false }))
 				}
 			)
 			.catch( err => console.log(err));
@@ -73,10 +78,7 @@ class SingleContent extends Component{
 	}
 
 	render(){
-		const { tvmaze } = this.state;
-		const { omdb } = this.state;
-	 	const { tmdb } = this.state;
-		const { searchMode } = this.state;
+		const { tvmaze, omdb, tmdb, searchMode, isFetching } = this.state;
 
 		if( searchMode === "series"){
 			return(
@@ -88,6 +90,8 @@ class SingleContent extends Component{
 
 							<Col lg="5">
 								{
+									!isFetching
+									&&
 									tvmaze!==null
 									&&
 									omdb!==null
@@ -97,9 +101,16 @@ class SingleContent extends Component{
 									<ContentCard tvmaze={tvmaze} omdb={omdb} tmdb={tmdb} searchMode={searchMode}/>
 								}
 								{
+									!isFetching
+									&&
 									tvmaze!==null
 									&&
 									<EpisodeList tvmaze={tvmaze} searchMode={searchMode}/>
+								}
+								{
+									isFetching
+									&&
+									<Loader img={loaderSrc} sz={320}/>
 								}
 							</Col>
 						</Row>
@@ -111,16 +122,23 @@ class SingleContent extends Component{
 			return(
 				<React.Fragment>
 					{ tmdb===null && omdb===null }
+					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 					<Container>
 						<Row className="justify-content-md-center">
-							<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 							<Col lg="5">
 								{
+									!isFetching
+									&&
 									tmdb!==null
 									&&
 									omdb!==null
 									&&
 									<ContentCard tmdb={tmdb} omdb={omdb}/>
+								}
+								{
+									isFetching
+									&&
+									<Loader img={loaderSrc} sz={320}/>
 								}
 							</Col>
 						</Row>

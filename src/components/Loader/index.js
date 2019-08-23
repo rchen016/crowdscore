@@ -4,9 +4,10 @@ import loaderSrc from '../../assets/loader2.gif';
 const Loader = props => (
 	<div>
 		<img
-			style={{width:100}}
+			className="loaderStyle"
+			style={{width:props.sz}}
 			alt="Loader Icon"
-			src={loaderSrc}
+			src={props.img}
 		/>
 	</div>
 )

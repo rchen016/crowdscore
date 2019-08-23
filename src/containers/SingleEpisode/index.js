@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button  } from 'react-bootstrap';
 import EpisodeCard from '../../components/EpisodeCard';
 import "./index.css";
+import loaderSrc from '../../assets/loader.gif';
+import Loader from '../../components/Loader';
 
 class SingleEpisode extends Component{
 	state = {
@@ -19,14 +21,15 @@ class SingleEpisode extends Component{
 	componentDidMount(){
 		const { id } = this.props.match.params;
 		//Fetch Single Episode to pass to Episode Card Component
+		this.setState({ isFetching: true});
 		fetch(`http://api.tvmaze.com/episodes/${id}`)
 			.then( (response) => response.json() )
-			.then(json => {this.setState( { tvmaze: json } ); console.log(json);})
+			.then(json => {this.setState( { tvmaze: json, isFetching: false } ); console.log(json);})
 			.catch( err => console.log(err));
 	}
 
 	render(){
-		const { tvmaze } = this.state;
+		const { tvmaze, isFetching } = this.state;
 
 		return(
 			<React.Fragment>
@@ -35,11 +38,17 @@ class SingleEpisode extends Component{
 					<Row className="justify-content-md-center">
 						<Col lg="5">
 							{
+								!isFetching
+								&&
 								tvmaze!==null
 								&&
 								<EpisodeCard tvmaze={ tvmaze }/>
 							}
-
+							{
+								isFetching
+								&&
+								<Loader img={loaderSrc} sz={330} />
+							}
 						</Col>
 					</Row>
 				</Container>

@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Logo from "../../assets/logo.png";
 import './index.css';
 import axios from 'axios';
+import loaderSrc from '../../assets/loader.gif';
 
 class Content extends Component{
 
@@ -110,7 +111,7 @@ class Content extends Component{
 								<p> None Found </p>
 							}
 							{
-								isFetching && <Loader />
+								isFetching && <Loader img={loaderSrc} sz={100}/>
 							}
 							{
 								!isFetching && isMovieSearch && <ContentList list={this.state.movie} isMovie={isMovieSearch}/>
