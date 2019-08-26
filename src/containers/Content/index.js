@@ -121,7 +121,7 @@ class Content extends Component{
 							}
 						</Col>
 					</Row>
-					<Footer />
+					
 				</Container>
 			</React.Fragment>
 
