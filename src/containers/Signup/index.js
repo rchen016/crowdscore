@@ -30,9 +30,13 @@ submitHandler = e =>{
 	const test = {
 		name: "Hello World"
 	}
-	axios.post('http://localhost:3000/signup', test)
+	axios.post('http://localhost:3000/signup', this.state)
 	.then(res=>{
+		console.log("Results:")
 		console.log(res);
+		console.log(res.config.data);
+		return res;
+
 	})
 	.catch(err=>{
 		console.log("ERR",err);
