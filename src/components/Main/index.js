@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Content from '../../containers/Content';
 import SingleContent from '../../containers/SingleContent';
 import SingleEpisode from '../../containers/SingleEpisode';
+import Signup from '../../containers/Signup';
 
 const Main = props => (
 	<Switch>
@@ -10,6 +11,7 @@ const Main = props => (
 		<Route path="/series/:id" component={SingleContent} />
 		<Route path="/episode/:id" component={SingleEpisode} />
 		<Route path="/movie/:id" component={SingleContent} />
+		<Route path="/signup" exact component={Signup} />
 		<Route path="/:" component={Content} />
 	</Switch>
 )
