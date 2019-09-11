@@ -13,6 +13,8 @@ var express          = require("express"),
 	cors             = require("cors"),
 	PORT             = 5000;
 
+
+
 var url = process.env.DATABASEURL || "mongodb://localhost/movie_app";
 mongoose.connect(url,{useNewUrlParser: true});
 
@@ -47,6 +49,8 @@ app.post("/signup", function(req,res){
 		else{
 			passport.authenticate("local")(req, res, function(){
 				console.log("YEE");
+				// res.render("localhost:3000/");
+				// res.sendFile(path.join('C:\\Users\\rchen\\Desktop\\v3\\crowdscore\\public\\index.html'));
 				res.redirect("/");
 			});
 		}
