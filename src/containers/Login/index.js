@@ -1,31 +1,31 @@
 import React, { Component } from "react";
-import "./index.css";
 import axios from 'axios';
+import "./index.css";
 
-export default class Signup extends Component {
-	constructor(props) {
+export default class Login extends Component{
+
+	constructor(props){
 		super(props);
+
 		this.changeHandler = this.changeHandler.bind(this);
 		this.submitHandler = this.submitHandler.bind(this);
-
 		this.state = {
 			username: "",
-			password: "",
-			confirmPassword: "",
-		};
+			password: ""
+		}
 	}
-
 
 	changeHandler = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
+
 	submitHandler = e =>{
 		e.preventDefault();
 		console.log(this.state);
 
-		axios.post('http://localhost:3000/signup', this.state)
+		axios.post('http://localhost:3000/login', this.state)
 			.then(res=>{
 				console.log("Results:")
 				console.log(res);
@@ -41,10 +41,12 @@ export default class Signup extends Component {
 
 	}
 
-	render() {
-		const { username, password, confirmPassword } = this.state;
-		return (
-			<div className="Signup">
+	render(){
+
+		const { username, password } = this.state;
+
+		return(
+			<div className="Login">
 				<form onSubmit={this.submitHandler}>
 					<div className="form-group">
 						<input
@@ -65,16 +67,7 @@ export default class Signup extends Component {
 						onChange={this.changeHandler}/>
 					</div>
 					<div className="form-group">
-						<input
-						className="form-control"
-						type="password"
-						name="confirmPassword"
-						placeholder="Confirm Password"
-						value={confirmPassword}
-						onChange={this.changeHandler}/>
-					</div>
-					<div className="form-group">
-						<button type="Submit" className="btn btn-lg btn-info btn-block">Sign Up</button>
+						<button type="Submit" className="btn btn-lg btn-info btn-block">Login</button>
 					</div>
 				</form>
 			</div>

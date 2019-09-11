@@ -31,6 +31,12 @@ app.use(require("express-session")({
 	resave: false,
 	saveUninitialized: false
 }));
+app.use(function(req,res,next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -48,13 +54,18 @@ app.post("/signup", function(req,res){
 		}
 		else{
 			passport.authenticate("local")(req, res, function(){
-				console.log("YEE");
-				// res.render("localhost:3000/");
-				// res.sendFile(path.join('C:\\Users\\rchen\\Desktop\\v3\\crowdscore\\public\\index.html'));
+				console.log("Account Created");
 				res.redirect("/");
 			});
 		}
 	});
+});
+
+app.post("/login", passport.authenticate("local",
+	{
+		successRedirect: "/",
+		failureRedirect: "/login"
+	}),function(req,res){
 });
 
 app.listen(process.env.PORT || PORT, function(){

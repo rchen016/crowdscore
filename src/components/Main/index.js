@@ -4,6 +4,7 @@ import Content from '../../containers/Content';
 import SingleContent from '../../containers/SingleContent';
 import SingleEpisode from '../../containers/SingleEpisode';
 import Signup from '../../containers/Signup';
+import Login from '../../containers/Login';
 
 const Main = props => (
 	<Switch>
@@ -12,6 +13,7 @@ const Main = props => (
 		<Route path="/episode/:id" component={SingleEpisode} />
 		<Route path="/movie/:id" component={SingleContent} />
 		<Route path="/signup" exact component={Signup} />
+		<Route path="/login" exact component={Login} />
 		<Route path="/:" component={Content} />
 	</Switch>
 )

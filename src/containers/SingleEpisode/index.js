@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button  } from 'react-bootstrap';
 import EpisodeCard from '../../components/EpisodeCard';
 import "./index.css";
-import loaderSrc from '../../assets/loader.gif';
+import loaderSrc from '../../assets/loader3.gif';
 import Loader from '../../components/Loader';
 
 class SingleEpisode extends Component{
