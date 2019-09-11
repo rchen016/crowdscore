@@ -25,20 +25,19 @@ export default class Login extends Component{
 		e.preventDefault();
 		console.log(this.state);
 
-		axios.post('http://localhost:3000/login', this.state)
+		axios.post('/login', this.state)
 			.then(res=>{
 				console.log("Results:")
 				console.log(res);
 				console.log(res.config.data);
 				//return res;
-				console.log("Check");
+				console.log("THIS? ", this);
 				this.props.history.push("/");
 			})
 			.catch(err=>{
 				console.log("ERR",err);
 			})
 			console.log("Check2");
-
 	}
 
 	render(){

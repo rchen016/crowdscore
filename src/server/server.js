@@ -61,11 +61,27 @@ app.post("/signup", function(req,res){
 	});
 });
 
-app.post("/login", passport.authenticate("local",
-	{
-		successRedirect: "/",
-		failureRedirect: "/login"
-	}),function(req,res){
+// app.post("/login", passport.authenticate("local",
+// 	{
+// 		successRedirect: "/",
+// 		failureRedirect: "/login"
+// 	}),function(req,res){
+// 		console.log("Whos on?: "+req.user);
+// });
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+	console.log("Whos on?: "+req.user);
+    res.redirect('/');
+});
+
+app.post("/logout",function(req,res){
+	console.log("Logout");
+	req.logout();
+
+	res.redirect("/");
 });
 
 app.listen(process.env.PORT || PORT, function(){

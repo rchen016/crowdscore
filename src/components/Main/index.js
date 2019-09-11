@@ -14,6 +14,7 @@ const Main = props => (
 		<Route path="/movie/:id" component={SingleContent} />
 		<Route path="/signup" exact component={Signup} />
 		<Route path="/login" exact component={Login} />
+		<Route path="/logout" exact component={Content} />
 		<Route path="/:" component={Content} />
 	</Switch>
 )

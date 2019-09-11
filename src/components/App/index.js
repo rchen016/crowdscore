@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Main from '../Main';
 import 'whatwg-fetch';
-import { NavigationBar } from '../Navigation';
-// import { Footer } from '../Footer';
+import  NavigationBar  from '../Navigation';
 
 class App extends Component {
 	render(){
