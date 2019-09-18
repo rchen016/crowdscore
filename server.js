@@ -5,9 +5,9 @@ const path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const db = require("./config/keys").mongoURI;
-const port = process.env.PORT || 5000;
+
 const passport = require("passport");
-const users = require("./src/routes/api/users");
+const users = require("./routes/api/users");
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -35,5 +35,5 @@ app.post("./register", function(res,req){
 //   )
 //   .then(() => console.log("MongoDB successfully connected"))
 //   .catch(err => console.log(err));
-
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
