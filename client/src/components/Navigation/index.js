@@ -21,7 +21,7 @@ const Styles = styled.div`
 	}
 `;
 
-export const NavigationBar = () =>(
+export const NavBar = () =>(
 	<Styles>
 		<Navbar expand="lg">
 			<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>

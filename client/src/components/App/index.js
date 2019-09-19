@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Main from '../Main';
 import 'whatwg-fetch';
-import { NavigationBar } from '../Navigation';
+import  {NavBar}  from '../Navigation';
 // import { Footer } from '../Footer';
 import { Provider } from "react-redux";
 import store from "../../store";
@@ -34,7 +34,7 @@ class App extends Component {
 		 return (
 			<Provider store={store}>
 				<React.Fragment >
-					<NavigationBar />
+					<NavBar />
 					<Main/>
 				</React.Fragment>
 			</Provider>
