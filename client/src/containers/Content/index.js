@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ContentList from '../../components/ContentList';
 import Loader from '../../components/Loader';
-import { Footer } from '../../components/Footer';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from "../../assets/logo.png";
 import './index.css';
@@ -121,7 +120,7 @@ class Content extends Component{
 							}
 						</Col>
 					</Row>
-					
+
 				</Container>
 			</React.Fragment>
 
