@@ -29,7 +29,7 @@ export const NavBar = () =>(
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="ml-auto">
 					<Nav.Item>
-						<Nav.Link href="/">Login</Nav.Link>
+						<Nav.Link href="/login">Login</Nav.Link>
 					</Nav.Item>
 				</Nav>
 			</Navbar.Collapse>

@@ -22,8 +22,6 @@ class Content extends Component{
 		this.onLogoClick = this.onLogoClick.bind(this);
 	}
 
-
-
 	onContentInputChange = e =>{
 		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
@@ -68,56 +66,60 @@ class Content extends Component{
 
 							<img className="logoStyle" alt="default" onClick={this.onLogoClick} src={Logo}></img>
 							{
-								isMovieSearch
-								&&
-								<input
-			   						value={movieName}
-			   						type="text"
-			   						onChange={this.onContentInputChange} />
+								isMovieSearch ? (
+									<input
+				   						value={movieName}
+				   						type="text"
+				   						onChange={this.onContentInputChange} />
+								) : (
+									<input
+				   						value={seriesName}
+				   						type="text"
+				   						onChange={this.onContentInputChange} />
+								)
 							}
-							{
-								!isMovieSearch
-								&&
-								<input
-			   						value={seriesName}
-			   						type="text"
-			   						onChange={this.onContentInputChange} />
-							}
-
 						</Col>
 					</Row>
 					<Row>
 						<Col className="justify-content-md-center text-center">
-							{
-								!isFetching && movie.length===0 && movieName.trim() === '' && isMovieSearch
-								&&
-								<p className="enterDefaultText"> Please enter Movie Name </p>
-							}
-							{
-								!isFetching && series.length===0 && seriesName.trim() === '' && !isMovieSearch
-								&&
-								<p className="enterDefaultText"> Please enter Series Name </p>
-							}
 
 							{
-								!isFetching && series.length===0 && seriesName.trim() !== '' && !isMovieSearch
-								&&
-								<p> None Found </p>
+								isMovieSearch ? (
+									movieName.trim() === '' ? (
+										!isFetching && movie.length===0
+										&&
+										<p className="enterDefaultText"> Please enter Movie Name </p>
+									) : (
+										!isFetching && movie.length===0
+										&&
+										<p> None Found </p>
+									)
+
+								) : (
+									seriesName.trim() === '' ? (
+										!isFetching && series.length===0
+										&&
+										<p className="enterDefaultText"> Please enter Series Name </p>
+									) : (
+										!isFetching && series.length===0
+										&&
+										<p> No Series Found </p>
+									)
+
+								)
 							}
 							{
-								!isFetching && movie.length===0 && movieName.trim() !== '' && isMovieSearch
-								&&
-								<p> None Found </p>
+								isFetching ? (
+									<Loader img={loaderSrc} sz={100}/>
+								) : (
+									isMovieSearch ? (
+										!isFetching && <ContentList list={this.state.movie} isMovie={isMovieSearch}/>
+									) : (
+										!isFetching && <ContentList list={this.state.series} isMovie={isMovieSearch}/>
+									)
+								)
 							}
-							{
-								isFetching && <Loader img={loaderSrc} sz={100}/>
-							}
-							{
-								!isFetching && isMovieSearch && <ContentList list={this.state.movie} isMovie={isMovieSearch}/>
-							}
-							{
-								!isFetching && !isMovieSearch && <ContentList list={this.state.series} isMovie={isMovieSearch}/>
-							}
+
 						</Col>
 					</Row>
 
