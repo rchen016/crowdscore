@@ -26,7 +26,9 @@ class Content extends Component{
 		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
 			console.log("Series Query");
+			console.log("SeriesName Pre: ", this.state.seriesName+" "+this.state.series);
 			this.setState({ seriesName: e.target.value, isFetching: true});
+			console.log("SeriesName Post: ", this.state.seriesName+" "+this.state.series);
 			fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
 				.then( (response) => response.json() )
 				.then( json => this.setState( { series: json, isFetching:false }))
@@ -35,7 +37,9 @@ class Content extends Component{
 		else{
 			console.log("Movie Query");
 			if(e.target.value!==''){
+				console.log("MovieName Pre: ", this.state.movieName+" "+this.state.movie);
 				this.setState({ movieName: e.target.value, isFetching: true});
+				console.log("MovieName Post: ", this.state.movieName+" "+this.state.movie);
 				axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
 						.then(res=>{
 							const movie = res.data;
@@ -44,6 +48,8 @@ class Content extends Component{
 						.catch( err => console.log(err));
 			}
 			else{
+				console.log("Other Movie Query");
+				//Blank Case after user input
 				this.setState({ movieName: e.target.value, isFetching: false, movie:''});
 			}
 		}
@@ -92,7 +98,7 @@ class Content extends Component{
 									) : (
 										!isFetching && movie.length===0
 										&&
-										<p> None Found </p>
+										<p> No Movie Found </p>
 									)
 
 								) : (
@@ -122,7 +128,6 @@ class Content extends Component{
 
 						</Col>
 					</Row>
-
 				</Container>
 			</React.Fragment>
 

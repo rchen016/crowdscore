@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Nav, Navbar, Button} from 'react-bootstrap';
+import {Nav, Navbar} from 'react-bootstrap';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -41,8 +41,7 @@ onLogoutClick = e => {
 							{
 								user.name ? (
 									<Nav.Item>
-										<Button onClick={this.onLogoutClick}> </Button>
-
+										<Nav.Link onClick={this.onLogoutClick}>Logout</Nav.Link>
 									</Nav.Item>
 								) : (
 									<Nav.Item>
@@ -58,14 +57,15 @@ onLogoutClick = e => {
 		);
 	}
 }
+
 NavBar.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+	logoutUser: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+	auth: state.auth
 });
 export default connect(
-  mapStateToProps,
-  { logoutUser }
+	mapStateToProps,
+	{ logoutUser }
 )(NavBar);

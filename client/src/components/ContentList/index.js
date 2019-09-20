@@ -15,6 +15,7 @@ function extractMovieNames(props,store){
 	for(var key in props.list.results){
 		if(!props.list.results.hasOwnProperty(key)) continue;
 		var obj = props.list.results[key];
+		// console.log("obj: ",obj);
 		store.push(
 			<Link to={`/movie/${obj.id}`}>
 				{obj.original_title}
