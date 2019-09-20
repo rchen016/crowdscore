@@ -16,7 +16,9 @@ app.use(
 app.use(bodyParser.json());
 
 var url = process.env.DATABASEURL || "mongodb://localhost/movie_app";
-mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true})
+				.then(()=> console.log("MongoDB Connected!"))
+				.catch(err=>console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
