@@ -27,6 +27,10 @@ require("./config/passport")(passport);
 // Routes
 app.use(users);
 
+if(process.env.NODE_ENV === "production"){
+	app.use(express.static("client/build"));
+}
+
 app.post("./register", function(res,req){
 	console.log("test");
 });
