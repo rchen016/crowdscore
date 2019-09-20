@@ -1,6 +1,9 @@
-import React from 'react';
-import {Nav, Navbar} from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Nav, Navbar, Button} from 'react-bootstrap';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 const Styles = styled.div`
 	.navbar{
@@ -21,18 +24,48 @@ const Styles = styled.div`
 	}
 `;
 
-export const NavBar = () =>(
-	<Styles>
-		<Navbar expand="lg">
-			<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="ml-auto">
-					<Nav.Item>
-						<Nav.Link href="/login">Login</Nav.Link>
-					</Nav.Item>
-				</Nav>
-			</Navbar.Collapse>
-		</Navbar>
-	</Styles>
-)
+class NavBar extends Component {
+onLogoutClick = e => {
+  e.preventDefault();
+  this.props.logoutUser();
+};
+	render(){
+		const { user } = this.props.auth;
+		return(
+			<Styles>
+				<Navbar expand="lg">
+					<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
+						<Nav className="ml-auto">
+							{
+								user.name ? (
+									<Nav.Item>
+										<Button onClick={this.onLogoutClick}> </Button>
+
+									</Nav.Item>
+								) : (
+									<Nav.Item>
+										<Nav.Link href="/login">Login</Nav.Link>
+									</Nav.Item>
+								)
+							}
+
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+			</Styles>
+		);
+	}
+}
+NavBar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(NavBar);

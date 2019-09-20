@@ -47,6 +47,7 @@ router.post("/api/users/register", (req, res) => {
 });
 
 router.post("/api/users/login", (req, res) => {
+	console.log("Route Login");
     // Form validation
     const {
         errors,

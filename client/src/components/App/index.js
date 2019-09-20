@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Main from '../Main';
 import 'whatwg-fetch';
-import  {NavBar}  from '../Navigation';
+import  NavBar  from '../Navigation';
 // import { Footer } from '../Footer';
 import { Provider } from "react-redux";
 import store from "../../store";
