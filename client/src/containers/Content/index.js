@@ -17,7 +17,8 @@ class Content extends Component{
 			isFetching: false,
 			isMovieSearch: true,
 			movie: [],
-			movieName: ''
+			movieName: '',
+			isMovieEmpty: false
 		}
 		this.onLogoClick = this.onLogoClick.bind(this);
 	}
@@ -26,9 +27,8 @@ class Content extends Component{
 		//Fetch from correct API depending on Series Search or Movie Search
 		if(!this.state.isMovieSearch){
 			console.log("Series Query");
-			console.log("SeriesName Pre: ", this.state.seriesName+" "+this.state.series);
 			this.setState({ seriesName: e.target.value, isFetching: true});
-			console.log("SeriesName Post: ", this.state.seriesName+" "+this.state.series);
+
 			fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
 				.then( (response) => response.json() )
 				.then( json => this.setState( { series: json, isFetching:false }))
@@ -39,11 +39,11 @@ class Content extends Component{
 			if(e.target.value!==''){
 				console.log("MovieName Pre: ", this.state.movieName+" "+this.state.movie);
 				this.setState({ movieName: e.target.value, isFetching: true});
-				console.log("MovieName Post: ", this.state.movieName+" "+this.state.movie);
+				console.log("Movie 1 Check: ",this.state.movie);
 				axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c668e9ba0082ada9bd8061d745ade430&query=${e.target.value}`)
 						.then(res=>{
-							const movie = res.data;
-							this.setState({ movie, isFetching:false });
+							const movie = res.data.results;
+							this.setState({ movie, isFetching:false});
 						})
 						.catch( err => console.log(err));
 			}
@@ -63,7 +63,7 @@ class Content extends Component{
 	}
 
 	render(){
-		const { series, seriesName, isFetching, isMovieSearch, movie, movieName } = this.state;
+		const { series, seriesName, isFetching, isMovieSearch, movie, movieName, isMovieEmpty } = this.state;
 		return(
 			<React.Fragment>
 				<Container className="mainBox">
@@ -88,17 +88,16 @@ class Content extends Component{
 					</Row>
 					<Row>
 						<Col className="justify-content-md-center text-center">
-
 							{
 								isMovieSearch ? (
 									movieName.trim() === '' ? (
 										!isFetching && movie.length===0
 										&&
-										<p className="enterDefaultText"> Please enter Movie Name </p>
+										<p className="enterDefaultText"> Please enter Movie Name</p>
 									) : (
 										!isFetching && movie.length===0
 										&&
-										<p> No Movie Found </p>
+										<p> No Movie Found</p>
 									)
 
 								) : (

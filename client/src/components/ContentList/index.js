@@ -10,48 +10,37 @@ const SeriesListItem = ({series}) => (
 	</li>
 )
 
-function extractMovieNames(props,store){
-	//Extract the Movie Names only
-	for(var key in props.list.results){
-		if(!props.list.results.hasOwnProperty(key)) continue;
-		var obj = props.list.results[key];
-		// console.log("obj: ",obj);
-		store.push(
-			<Link to={`/movie/${obj.id}`}>
-				{obj.original_title}
-			</Link>
-		);
-	}
-}
+const MovieListItem = ({movie}) => (
+	<li>
+		<Link to={`/movie/${movie.id}`}>
+			{ movie.original_title }
+		</Link>
+	</li>
+)
 
 const ContentList = (props) => {
 
 	var isMovieMode = props.isMovie;
-
-	if(isMovieMode){
-		var movieList = [];
-		extractMovieNames(props,movieList);
+	if(props.list!==""){
 		return(
-			<div>
+			isMovieMode ? (
 				<ul className="contentList">
-					{ movieList.map(data=>(
-						<li key={data.props.to}>
-							{data}
-						</li>
+					{ props.list.map(movie => (
+						<MovieListItem key={movie.id} movie={movie}/>
 					))}
 				</ul>
-			</div>
+			) : (
+					<ul className="contentList">
+						{ props.list.map(series => (
+							<SeriesListItem key={series.show.id } series={series}/>
+						))}
+					</ul>
+			)
 		)
 	}
 	else{
 		return(
-			<div>
-				<ul className="contentList">
-					{ props.list.map(series => (
-						<SeriesListItem key={series.show.id } series={series}/>
-					))}
-				</ul>
-			</div>
+			<></>
 		)
 	}
 }
