@@ -17,8 +17,7 @@ class Content extends Component{
 			isFetching: false,
 			isMovieSearch: true,
 			movie: [],
-			movieName: '',
-			isMovieEmpty: false
+			movieName: ''
 		}
 		this.onLogoClick = this.onLogoClick.bind(this);
 	}
@@ -63,7 +62,7 @@ class Content extends Component{
 	}
 
 	render(){
-		const { series, seriesName, isFetching, isMovieSearch, movie, movieName, isMovieEmpty } = this.state;
+		const { series, seriesName, isFetching, isMovieSearch, movie, movieName } = this.state;
 		return(
 			<React.Fragment>
 				<Container className="mainBox">
