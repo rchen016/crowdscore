@@ -6,6 +6,8 @@ import SingleEpisode from '../../containers/SingleEpisode';
 import Login from '../Auth/Login';
 import Register from '../Auth/Register';
 import Landing from '../Layout';
+import Profile from '../Profile';
+import PrivateRoutes from '../PrivateRoutes';
 
 const Main = props => (
 	<Switch>
@@ -16,6 +18,7 @@ const Main = props => (
 		<Route path="/login" component={Login} />
 		<Route path="/register" component={Register} />
 		<Route path="/landing" component={Landing} />
+		<PrivateRoutes path="/profile" component={Profile} />
 		<Route path="/:" component={Content} />
 	</Switch>
 )
