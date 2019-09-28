@@ -103,8 +103,6 @@ class SingleContent extends Component{
 					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 					<Container>
 						<Button onClick={()=>{this.addContentItem(tvmaze)}}> ADD </Button>
-
-						{ user.name }
 						<Row className="justify-content-md-center">
 							<Col lg="5">
 								{

@@ -105,14 +105,11 @@ router.post("/api/users/login", (req, res) => {
 
 router.post("/api/users/addContent",(req,res)=>{
     const userId = req.body[0].id;
-    console.log("Pre Add Check: ",req.body[0].id);
-    console.log("3 ", req.body[1]);
-    console.log("Image ",req.body[1].image.original);
     //create contentObject
     const contentObject = [];
     const seriesPath = req.body[2];
     const seriesImage = req.body[1].image.original;
-    console.log()
+    var isAdded = false;
     contentObject.push(seriesPath);
     contentObject.push(seriesImage);
     User.findById(
@@ -123,10 +120,21 @@ router.post("/api/users/addContent",(req,res)=>{
             console.log("User Not Found");
             return;
         }
-        console.log("Found User! ", user);
-        user.contentList.push(contentObject);
-        user.save();
-        console.log("Updated User: ", user);
+
+        console.log("USER Examine: ", user.contentList[0][0]);
+        //Check if already added
+        for(var i=0; i< user.contentList.length;i++){
+            if(user.contentList[i][0] === seriesPath){
+                console.log("Already Added");
+                isAdded = true;
+            }
+        }
+        if(!isAdded){
+            console.log("Found User! ", user);
+            user.contentList.push(contentObject);
+            user.save();
+            console.log("Updated User: ", user);
+        }
     })
     .catch(err=>{
         console.log(err);
