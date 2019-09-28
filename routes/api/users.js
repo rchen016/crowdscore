@@ -132,4 +132,24 @@ router.post("/api/users/addContent",(req,res)=>{
         console.log(err);
     });
 });
+
+router.post("/api/users/getData", (req,res)=>{
+    console.log("Get me that data");
+    console.log(req.body.auth.user.id);
+    const userId = req.body.auth.user.id;
+    User.findById(
+        mongoose.Types.ObjectId(userId)
+    )
+    .then(user=>{
+        if(!user){
+            console.log("User Not Found");
+            return;
+        }
+        console.log("Found User! ", user);
+        res.send(user);
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+});
 module.exports = router;
