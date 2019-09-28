@@ -28,20 +28,33 @@ class SingleContent extends Component{
 	}
 
 	addContentItem(contentItem){
-		console.log("Adding Now...");
-		console.log("CHECK: ", this.props.location.pathname);
-		console.log("CHECK2 ", contentItem);
-		//pass all the data to server to add into DB
+		console.log("Search Mode ", this.state.searchMode);
 		const contentLocation = this.props.location.pathname;
 		const currentUser = this.props.auth.user;
 		const storage = [];
-		storage.push(currentUser);
-		storage.push(contentItem);
-		storage.push(contentLocation);
-		// storage.push.()
-		console.log("HMM", storage);
-		this.props.addContent(storage,this.props.history);
+		if(this.state.searchMode==="movie"){
+			console.log("Movie");
+			storage.push(currentUser);
+			storage.push(contentLocation);
+			storage.push(contentItem);
+			console.log("HMM", storage);
+			this.props.addContent(storage,this.props.history);
+			console.log("What it be: ",contentItem);
+		}
+		else{
+			console.log("Adding Now...");
+			console.log("CHECK: ", this.props.location.pathname);
+			console.log("CHECK2 ", contentItem);
+			//pass all the data to server to add into DB
+			storage.push(currentUser);
+			storage.push(contentItem);
+			storage.push(contentLocation);
+			// storage.push.()
+			console.log("HMM", storage);
+			this.props.addContent(storage,this.props.history);
+		}
 	}
+
 	componentDidMount(){
 		this.setState({searchMode: this.props.location.pathname.split("/")[1]});
 		console.log(this.props.location.pathname.split("/")[1]);
@@ -81,7 +94,7 @@ class SingleContent extends Component{
 			fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=c668e9ba0082ada9bd8061d745ade430&append_to_response=credits`)
 			.then( (response) => response.json() )
 			.then( json =>{
-					console.log(json);
+					console.log("movie check", json);
 					this.setState( { tmdb: json } );
 					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
 					.then( (response) => response.json() )
@@ -130,7 +143,7 @@ class SingleContent extends Component{
 				<React.Fragment>
 					{ tmdb===null && omdb===null }
 					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
-					<Button onClick={this.addContent}> ADD </Button>
+					<Button onClick={()=>{this.addContentItem(tmdb)}}> ADD </Button>
 					<Container>
 						<Row className="justify-content-md-center">
 							<Col lg="5">

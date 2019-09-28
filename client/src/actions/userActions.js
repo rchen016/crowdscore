@@ -9,7 +9,7 @@ export const addContent = (contentData, history) => dispatch => {
   console.log("Add Content: ", contentData);
   axios
     .post("/api/users/addContent", contentData)
-    .then(res => history.push("/")) // re-direct to login on successful register
+    .then(res => history.push("/")) 
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

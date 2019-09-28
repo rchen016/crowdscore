@@ -104,12 +104,33 @@ router.post("/api/users/login", (req, res) => {
 });
 
 router.post("/api/users/addContent",(req,res)=>{
-    const userId = req.body[0].id;
+
+    console.log("body check: ",req.body[2].poster_path);
+
+    var userId, seriesPath, seriesImage;
     //create contentObject
-    const contentObject = [];
-    const seriesPath = req.body[2];
-    const seriesImage = req.body[1].image.original;
+    var contentObject = [];
     var isAdded = false;
+
+    console.log('Series or nah ',req.body[1].image);
+    if(req.body[1].image===undefined){
+        //movie case
+        userId = req.body[0].id;
+        seriesPath = req.body[1];
+        seriesImage = "http://image.tmdb.org/t/p/w185" + req.body[2].poster_path;
+        console.log("id ",userId);
+        console.log("path: ",seriesPath);
+        console.log("id ",seriesImage);
+    }
+    else{
+        //series case
+        userId = req.body[0].id;
+        seriesPath = req.body[2];
+        seriesImage = req.body[1].image.original;
+        console.log("id ",userId);
+        console.log("path: ",seriesPath);
+        console.log("id ",seriesImage);
+    }
     contentObject.push(seriesPath);
     contentObject.push(seriesImage);
     User.findById(
