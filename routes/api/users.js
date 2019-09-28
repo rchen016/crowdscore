@@ -120,7 +120,7 @@ router.post("/api/users/addContent",(req,res)=>{
         seriesImage = "http://image.tmdb.org/t/p/w185" + req.body[2].poster_path;
         console.log("id ",userId);
         console.log("path: ",seriesPath);
-        console.log("id ",seriesImage);
+        console.log("image ",seriesImage);
     }
     else{
         //series case
@@ -129,7 +129,7 @@ router.post("/api/users/addContent",(req,res)=>{
         seriesImage = req.body[1].image.original;
         console.log("id ",userId);
         console.log("path: ",seriesPath);
-        console.log("id ",seriesImage);
+        console.log("image ",seriesImage);
     }
     contentObject.push(seriesPath);
     contentObject.push(seriesImage);
@@ -142,7 +142,6 @@ router.post("/api/users/addContent",(req,res)=>{
             return;
         }
 
-        console.log("USER Examine: ", user.contentList[0][0]);
         //Check if already added
         for(var i=0; i< user.contentList.length;i++){
             if(user.contentList[i][0] === seriesPath){
