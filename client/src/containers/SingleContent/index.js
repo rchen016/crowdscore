@@ -27,12 +27,20 @@ class SingleContent extends Component{
 		this.props.history.goBack();
 	}
 
-	addContentItem(obj){
+	addContentItem(contentItem){
 		console.log("Adding Now...");
-		console.log("CHECK: ",this.props.history);
-		const testObj = {}
-		this.props.addContent(obj, this.props.history);
-
+		console.log("CHECK: ", this.props.location.pathname);
+		console.log("CHECK2 ", contentItem);
+		//pass all the data to server to add into DB
+		const contentLocation = this.props.location.pathname;
+		const currentUser = this.props.auth.user;
+		const storage = [];
+		storage.push(currentUser);
+		storage.push(contentItem);
+		storage.push(contentLocation);
+		// storage.push.()
+		console.log("HMM", storage);
+		this.props.addContent(storage,this.props.history);
 	}
 	componentDidMount(){
 		this.setState({searchMode: this.props.location.pathname.split("/")[1]});
@@ -94,7 +102,7 @@ class SingleContent extends Component{
 					{ tvmaze===null && omdb===null && tmdb===null }
 					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 					<Container>
-						<Button onClick={()=>{this.addContentItem(user)}}> ADD </Button>
+						<Button onClick={()=>{this.addContentItem(tvmaze)}}> ADD </Button>
 
 						{ user.name }
 						<Row className="justify-content-md-center">

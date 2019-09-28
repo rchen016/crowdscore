@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
+const mongoose = require("mongoose");
 
 router.post("/api/users/register", (req, res) => {
     console.log("Here?");
@@ -99,6 +100,36 @@ router.post("/api/users/login", (req, res) => {
                     });
             }
         });
+    });
+});
+
+router.post("/api/users/addContent",(req,res)=>{
+    const userId = req.body[0].id;
+    console.log("Pre Add Check: ",req.body[0].id);
+    console.log("3 ", req.body[1]);
+    console.log("Image ",req.body[1].image.original);
+    //create contentObject
+    const contentObject = [];
+    const seriesPath = req.body[2];
+    const seriesImage = req.body[1].image.original;
+    console.log()
+    contentObject.push(seriesPath);
+    contentObject.push(seriesImage);
+    User.findById(
+        mongoose.Types.ObjectId(userId)
+    )
+    .then(user=>{
+        if(!user){
+            console.log("User Not Found");
+            return;
+        }
+        console.log("Found User! ", user);
+        user.contentList.push(contentObject);
+        user.save();
+        console.log("Updated User: ", user);
+    })
+    .catch(err=>{
+        console.log(err);
     });
 });
 module.exports = router;
