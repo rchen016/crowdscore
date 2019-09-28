@@ -1,10 +1,7 @@
-import React, { Component,useState } from 'react';
+import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 
 class Caro extends Component{
-    constructor(props){
-        super(props);
-    }
     state = {
         listOfMovies: []
     }
@@ -19,7 +16,7 @@ class Caro extends Component{
             <div>
                 <Carousel>
                     {listOfMovies.map(item=>(
-                        <Carousel.Item>
+                        <Carousel.Item key={item}>
                             <img
                               className="d-block w-100"
                               src={item}

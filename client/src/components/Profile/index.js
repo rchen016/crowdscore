@@ -1,22 +1,24 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Caro from '../Carousel';
-
-const ShowSlideShow = () => (
-    <div>Slide Show Module </div>
-)
+import "./index.css";
 
 class Profile extends Component{
 
     render(){
         const { user } = this.props.auth;
 
-
         return(
             <>
+                <img
+                    className="profilePic"
+                    src="https://picsum.photos/210"
+                    alt="None"
+                />
                 Welcome { user.name }!
-
+                <br />
+                Your Movie List:
                 <Caro />
             </>
         )

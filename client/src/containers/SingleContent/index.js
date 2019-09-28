@@ -3,6 +3,10 @@ import { Container, Row, Col, Button  } from 'react-bootstrap';
 import ContentCard  from '../../components/ContentCard';
 import EpisodeList from '../../components/EpisodeList';
 import "./index.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addContent } from "../../actions/userActions";
+import { withRouter } from "react-router-dom";
 
 class SingleContent extends Component{
 	state = {
@@ -13,15 +17,23 @@ class SingleContent extends Component{
 		isFetching: null
 	}
 
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.goBack = this.goBack.bind(this);
+		this.addContentItem = this.addContentItem.bind(this);
 	}
 
 	goBack(){
 		this.props.history.goBack();
 	}
 
+	addContentItem(obj){
+		console.log("Adding Now...");
+		console.log("CHECK: ",this.props.history);
+		const testObj = {}
+		this.props.addContent(obj, this.props.history);
+
+	}
 	componentDidMount(){
 		this.setState({searchMode: this.props.location.pathname.split("/")[1]});
 		console.log(this.props.location.pathname.split("/")[1]);
@@ -74,19 +86,18 @@ class SingleContent extends Component{
 	}
 
 	render(){
-		const { tvmaze } = this.state;
-		const { omdb } = this.state;
-	 	const { tmdb } = this.state;
-		const { searchMode } = this.state;
-
+		const { tvmaze, omdb, tmdb, searchMode } = this.state;
+		const { user } = this.props.auth;
 		if( searchMode === "series"){
 			return(
 				<React.Fragment>
-					{ tvmaze===null && omdb===null && tmdb===null}
+					{ tvmaze===null && omdb===null && tmdb===null }
 					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
 					<Container>
-						<Row className="justify-content-md-center">
+						<Button onClick={()=>{this.addContentItem(user)}}> ADD </Button>
 
+						{ user.name }
+						<Row className="justify-content-md-center">
 							<Col lg="5">
 								{
 									tvmaze!==null
@@ -113,6 +124,7 @@ class SingleContent extends Component{
 				<React.Fragment>
 					{ tmdb===null && omdb===null }
 					<Button className="backBtn" onClick={this.goBack} variant="outline-dark">Back</Button>
+					<Button onClick={this.addContent}> ADD </Button>
 					<Container>
 						<Row className="justify-content-md-center">
 							<Col lg="5">
@@ -134,4 +146,15 @@ class SingleContent extends Component{
 	}
 }
 
-export default SingleContent;
+SingleContent.propTypes = {
+  auth: PropTypes.object.isRequired,
+  addContent: PropTypes.func.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { addContent }
+)(withRouter(SingleContent));
