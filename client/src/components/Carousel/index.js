@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addContent } from "../../actions/userActions";
-import Mongoose from 'mongoose';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Caro extends Component{
     state = {
-        listOfMovies: []
+        listOfContent: [],
+        listOfPath: []
     }
 
     componentDidMount(){
         console.log("Find User ", this.props);
         const contentImageList = [];
+        const contentPath = [];
+        //Populate image slide show on profile page
         axios.post('/api/users/getData', this.props)
         .then(res=>{
             console.log("????");
@@ -21,21 +23,22 @@ class Caro extends Component{
             for(var i=0; i< res.data.contentList.length;i++){
                 console.log(res.data.contentList[i][1]);
                 contentImageList.push(res.data.contentList[i][1]);
+                contentPath.push(res.data.contentList[i][0]);
             }
-            this.setState({listOfMovies:contentImageList});
+            this.setState({listOfContent:contentImageList, listOfPath: contentPath});
         })
         .catch(err=>{
             console.log(err);
         });
-	//	 this.setState({ listOfMovies: ["https://picsum.photos/200","https://picsum.photos/201","https://picsum.photos/202","https://picsum.photos/204"]})
 	}
 
     render(){
-        const { listOfMovies } = this.state;
+        const { listOfContent, listOfPath } = this.state;
         return(
             <div>
                 <Carousel>
-                    {listOfMovies.map(item=>(
+
+                    {listOfContent.map(item=>(
                         <Carousel.Item key={item}>
                             <img
                               className="d-block w-100"
