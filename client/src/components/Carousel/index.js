@@ -8,13 +8,18 @@ import { Link } from 'react-router-dom';
 class Caro extends Component{
     state = {
         listOfContent: [],
-        listOfPath: []
+        listOfPath: [],
+        mainStorage: {}
     }
 
     componentDidMount(){
         console.log("Find User ", this.props);
-        const contentImageList = [];
-        const contentPath = [];
+        var contentImageList = [];
+        var contentPath = [];
+        var testHolder = {
+            image: [],
+            path: []
+        };
         //Populate image slide show on profile page
         axios.post('/api/users/getData', this.props)
         .then(res=>{
@@ -24,8 +29,12 @@ class Caro extends Component{
                 console.log(res.data.contentList[i][1]);
                 contentImageList.push(res.data.contentList[i][1]);
                 contentPath.push(res.data.contentList[i][0]);
+                testHolder.image.push(res.data.contentList[i][1]);
+                testHolder.path.push(res.data.contentList[i][0]);
             }
-            this.setState({listOfContent:contentImageList, listOfPath: contentPath});
+            console.log("testHolder: ",testHolder);
+            this.setState({listOfContent:contentImageList, listOfPath: contentPath, mainStorage: testHolder});
+            console.log(this.state.mainStorage);
         })
         .catch(err=>{
             console.log(err);
@@ -33,22 +42,27 @@ class Caro extends Component{
 	}
 
     render(){
-        const { listOfContent, listOfPath } = this.state;
+        const { listOfContent, listOfPath, mainStorage } = this.state;
         return(
             <div>
                 <Carousel>
-
                     {listOfContent.map(item=>(
-                        <Carousel.Item key={item}>
+                        listOfPath.map(path=>(
+                            <Carousel.Item >
+                                {path}
+                            <Link to={path}>
                             <img
                               className="d-block w-100"
                               src={item}
                               alt="First slide"
                               />
+                             </Link>
                             <Carousel.Caption>
-                                {item}
+
+
                             </Carousel.Caption>
                         </Carousel.Item>
+                        ))
                     ))}
                 </Carousel>
             </div>
