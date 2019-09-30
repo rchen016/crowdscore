@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "./index.css";
 
 class Caro extends Component{
     state = {
@@ -45,24 +46,19 @@ class Caro extends Component{
         const { listOfContent, listOfPath, mainStorage } = this.state;
         return(
             <div>
-                <Carousel>
-                    {listOfContent.map(item=>(
-                        listOfPath.map(path=>(
-                            <Carousel.Item >
-                                {path}
-                            <Link to={path}>
-                            <img
-                              className="d-block w-100"
-                              src={item}
-                              alt="First slide"
-                              />
+                <Carousel className="mainCaro">
+                    {listOfContent.map((item,index)=>(
+                        <Carousel.Item className="mainCaro">
+                            <Link to={listOfPath[index]}>
+                                <img
+                                  className="d-block w-100"
+                                  src={item}
+                                  alt="First slide"
+                                  />
                              </Link>
                             <Carousel.Caption>
-
-
                             </Carousel.Caption>
                         </Carousel.Item>
-                        ))
                     ))}
                 </Carousel>
             </div>
