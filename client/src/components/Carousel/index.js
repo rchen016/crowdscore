@@ -46,25 +46,56 @@ class Caro extends Component{
 
     render(){
         const { listOfContent, listOfPath, mainStorage } = this.state;
-        const responsive = {
-      superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: 5,
-      },
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 3,
-      },
-      tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-      },
-      mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 3,
-      },
-    };
+        console.log("Count ",Object.keys(listOfContent).length);
+        var responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: { max: 4000, min: 3000 },
+                items: 5,
+            },
+            desktop: {
+                breakpoint: { max: 3000, min: 1024 },
+                items: 3,
+            },
+            tablet: {
+                breakpoint: { max: 1024, min: 464 },
+                items: 2,
+            },
+            mobile: {
+                breakpoint: { max: 464, min: 0 },
+                items: 3,
+            },
+        };
+        if(Object.keys(listOfContent).length<3){
+            //ensure for no contents for slideshow
+            switch(Object.keys(listOfContent).length){
+                case 0:
+                    console.log("0");
+                    responsive.superLargeDesktop.items = 1;
+                    responsive.desktop.items = 1;
+                    responsive.tablet.items = 1;
+                    responsive.mobile.items = 1;
+                    break;
+                case 1:
+                    console.log("1");
+                    responsive.superLargeDesktop.items = 1;
+                    responsive.desktop.items = 1;
+                    responsive.tablet.items = 1;
+                    responsive.mobile.items = 1;
+                    break;
+                case 2:
+                    console.log("2");
+                    responsive.superLargeDesktop.items = 2;
+                    responsive.desktop.items = 2;
+                    responsive.tablet.items = 2;
+                    responsive.mobile.items = 2;
+                    break;
+                default:
+                    console.log("Default");
+                    break;
+            }
+        }
+
         return(
             <div className="mainCaro">
                 <Carousel
@@ -89,7 +120,7 @@ class Caro extends Component{
                     swipeable
                 >
                     {listOfContent.map((item,index)=>(
-                        <Link to={listOfPath[index]}>
+                        <Link key={index} to={listOfPath[index]}>
                             <img
                               className="caroImg"
                               src={item}

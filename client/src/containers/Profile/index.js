@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Caro from '../Carousel';
+import Caro from '../component/Carousel';
 import "./index.css";
 
 class Profile extends Component{
