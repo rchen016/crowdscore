@@ -16,9 +16,11 @@ class Profile extends Component{
                     src="https://picsum.photos/210"
                     alt="None"
                 />
-                Welcome { user.name }!
-                <br />
-                Your Movie List:
+                <div className="nameContainer">
+                    <span className="userNameText">{ user.name }</span>
+                    <br />
+                    Your Movie List:
+                </div>
                 <Caro />
             </>
         )

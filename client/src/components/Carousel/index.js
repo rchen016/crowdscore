@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Carousel } from 'react-bootstrap';
+// import { Carousel } from 'react-bootstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "./index.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 class Caro extends Component{
     state = {
@@ -44,21 +46,56 @@ class Caro extends Component{
 
     render(){
         const { listOfContent, listOfPath, mainStorage } = this.state;
+        const responsive = {
+      superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5,
+      },
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 3,
+      },
+    };
         return(
-            <div>
-                <Carousel className="mainCaro">
+            <div className="mainCaro">
+                <Carousel
+                    className="caroMain"
+                    responsive={responsive}
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    containerClass="container-with-dots"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    infinite
+                    itemClass=""
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderDotsOutside={false}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                >
                     {listOfContent.map((item,index)=>(
-                        <Carousel.Item className="mainCaro">
-                            <Link to={listOfPath[index]}>
-                                <img
-                                  className="d-block w-100"
-                                  src={item}
-                                  alt="First slide"
-                                  />
-                             </Link>
-                            <Carousel.Caption>
-                            </Carousel.Caption>
-                        </Carousel.Item>
+                        <Link to={listOfPath[index]}>
+                            <img
+                              className="caroImg"
+                              src={item}
+                              alt="First slide"
+                              />
+                         </Link>
                     ))}
                 </Carousel>
             </div>
