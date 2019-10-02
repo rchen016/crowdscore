@@ -7,7 +7,6 @@ const ContentCard = (props) => {
 
 	if(props.searchMode==="series"){
 		return(
-
 			<Card className="sSeriesCard">
 				{
 					props.tvmaze.image!==null

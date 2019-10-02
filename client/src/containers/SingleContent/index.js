@@ -108,7 +108,6 @@ class SingleContent extends Component{
 
 	render(){
 		const { tvmaze, omdb, tmdb, searchMode } = this.state;
-		const { user } = this.props.auth;
 		if( searchMode === "series"){
 			return(
 				<React.Fragment>

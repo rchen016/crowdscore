@@ -11,33 +11,22 @@ import 'react-multi-carousel/lib/styles.css';
 class Caro extends Component{
     state = {
         listOfContent: [],
-        listOfPath: [],
-        mainStorage: {}
+        listOfPath: []
     }
 
     componentDidMount(){
         console.log("Find User ", this.props);
         var contentImageList = [];
         var contentPath = [];
-        var testHolder = {
-            image: [],
-            path: []
-        };
+
         //Populate image slide show on profile page
         axios.post('/api/users/getData', this.props)
         .then(res=>{
-            console.log("????");
-            console.log(res.data.contentList[1]);
             for(var i=0; i< res.data.contentList.length;i++){
-                console.log(res.data.contentList[i][1]);
                 contentImageList.push(res.data.contentList[i][1]);
                 contentPath.push(res.data.contentList[i][0]);
-                testHolder.image.push(res.data.contentList[i][1]);
-                testHolder.path.push(res.data.contentList[i][0]);
             }
-            console.log("testHolder: ",testHolder);
-            this.setState({listOfContent:contentImageList, listOfPath: contentPath, mainStorage: testHolder});
-            console.log(this.state.mainStorage);
+            this.setState({listOfContent:contentImageList, listOfPath: contentPath });
         })
         .catch(err=>{
             console.log(err);
@@ -45,7 +34,7 @@ class Caro extends Component{
 	}
 
     render(){
-        const { listOfContent, listOfPath, mainStorage } = this.state;
+        const { listOfContent, listOfPath } = this.state;
         console.log("Count ",Object.keys(listOfContent).length);
         var responsive = {
             superLargeDesktop: {
