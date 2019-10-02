@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import "./index.css";
+import { changePassword } from "../../actions/userActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const customStyles = {
     content : {
@@ -18,12 +22,15 @@ class Settings extends Component{
         super();
 
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            newPassword: "",
+            confirmNewPassword: ""
         };
 
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+
     }
     openModal() {
         this.setState({modalIsOpen: true});
@@ -38,9 +45,51 @@ class Settings extends Component{
         this.setState({modalIsOpen: false});
     }
 
+    onChangePWSubmits = e => {
+        console.log("Changing Password");
+        e.preventDefault();
+        const newPassword = {
+            newPassword: this.state.newPassword,
+            confirmNewPassword: this.state.confirmNewPassword,
+            user: this.props.auth.user
+        }
+        console.log("New P, ", newPassword );
+        console.log("This ", this);
+        this.props.changePassword(newPassword, this.props.history);
+    }
+
+    onChange = e => {
+        this.setState({
+            [e.target.id]: e.target.value
+        });
+    };
+
     render(){
+
+        const { newPassword, confirmNewPassword } = this.state;
         return(
             <div>
+                <form onSubmit={this.onChangePWSubmits}>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="New Password"
+                            id="newPassword"
+                            value={newPassword}
+                            onChange={this.onChange}/>
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Confirm New Password"
+                            id="confirmNewPassword"
+                            value={confirmNewPassword}
+                            onChange={this.onChange}/>
+                    </div>
+                    <div className="form-group">
+						<button type="Submit" className="btn btn-lg btn-info btn-block">Change Password</button>
+					</div>
+                </form>
                 <button onClick={this.openModal}>Open Modal</button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
@@ -55,16 +104,14 @@ class Settings extends Component{
 
                     <div>
                         <ul class="list-group">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item">Change Password</li>
+                            <li class="list-group-item">Edit Content List</li>
+                            <li class="list-group-item">Filler Settings Option 1</li>
+                            <li class="list-group-item">Filler Settings Option 2</li>
+                            <li class="list-group-item">Filler Settings Option 3</li>
+                            <li class="list-group-item">Filler Settings Option 4</li>
+                            <li class="list-group-item">Filler Settings Option 5</li>
+                            <li class="list-group-item">Filler Settings Option 6</li>
                         </ul>
                     </div>
                 </Modal>
@@ -73,4 +120,16 @@ class Settings extends Component{
     }
 }
 
-export default Settings;
+Settings.propTypes = {
+    auth: PropTypes.object.isRequired,
+    changePassword: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+    errors: state.errors,
+    auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { changePassword }
+)(withRouter(Settings));

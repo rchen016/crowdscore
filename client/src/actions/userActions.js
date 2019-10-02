@@ -16,3 +16,16 @@ export const addContent = (contentData, history) => dispatch => {
       })
     );
 };
+
+export const changePassword = (contentData, history) => dispatch =>{
+    console.log("Changing Password Now", contentData);
+    axios
+        .post("api/users/changePW", contentData)
+        .then(res => history.push("/profile"))
+        .catch(err=>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};

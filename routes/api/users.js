@@ -180,4 +180,34 @@ router.post("/api/users/getData", (req,res)=>{
         console.log(err);
     });
 });
+
+router.post("/api/users/changePW", (req,res)=>{
+    console.log("Change PW");
+    console.log(req.body);
+    console.log(req.body);
+    const userId = req.body.user.id;
+    User.findById(
+        mongoose.Types.ObjectId(userId)
+    )
+    .then(user=>{
+        if(!user){
+            console.log("User Not Found");
+            return;
+        }
+        console.log("Found User! ", user);
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(req.body.newPassword, salt, (err, hash) => {
+                if (err) throw err;
+                user.password = hash;
+                user
+                    .save()
+                    .then(user => res.json(user))
+                    .catch(err => console.log(err));
+            });
+        });
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+});
 module.exports = router;
