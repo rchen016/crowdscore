@@ -5,6 +5,7 @@ import { changePassword } from "../../actions/userActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import classnames from "classnames";
 
 const customStyles = {
     content : {
@@ -24,7 +25,8 @@ class Settings extends Component{
         this.state = {
             modalIsOpen: false,
             newPassword: "",
-            confirmNewPassword: ""
+            confirmNewPassword: "",
+            errors: {}
         };
 
         this.openModal = this.openModal.bind(this);
@@ -32,6 +34,15 @@ class Settings extends Component{
         this.closeModal = this.closeModal.bind(this);
 
     }
+    
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     openModal() {
         this.setState({modalIsOpen: true});
     }
@@ -66,26 +77,40 @@ class Settings extends Component{
 
     render(){
 
-        const { newPassword, confirmNewPassword } = this.state;
+        const { newPassword, confirmNewPassword, errors } = this.state;
         return(
             <div>
                 <form onSubmit={this.onChangePWSubmits}>
                     <div className="form-group">
                         <input
+                            className={classnames("form-control", {
+                                invalid: errors.newPassword || errors.newPasswordincorrect
+                            })}
                             type="password"
                             placeholder="New Password"
                             id="newPassword"
                             value={newPassword}
                             onChange={this.onChange}/>
                     </div>
+                    <span className="red-text">
+	                     {errors.newPassword}
+	                     {errors.newPasswordincorrect}
+	                </span>
                     <div className="form-group">
                         <input
+                            className={classnames("form-control", {
+                                invalid: errors.confirmNewPassword || errors.confirmNewPasswordincorrect
+                            })}
                             type="password"
                             placeholder="Confirm New Password"
                             id="confirmNewPassword"
                             value={confirmNewPassword}
                             onChange={this.onChange}/>
                     </div>
+                    <span className="red-text">
+	                     {errors.confirmNewPassword}
+	                     {errors.confirmNewPasswordincorrect}
+	                </span>
                     <div className="form-group">
 						<button type="Submit" className="btn btn-lg btn-info btn-block">Change Password</button>
 					</div>
@@ -130,6 +155,6 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 export default connect(
-  mapStateToProps,
-  { changePassword }
+    mapStateToProps,
+    { changePassword }
 )(withRouter(Settings));

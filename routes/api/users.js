@@ -5,6 +5,7 @@ const keys = require("../../config/keys");
 const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateChangePW = require("../../validation/changePassword");
 const User = require("../../models/User");
 const mongoose = require("mongoose");
 
@@ -185,6 +186,14 @@ router.post("/api/users/changePW", (req,res)=>{
     console.log("Change PW");
     console.log(req.body);
     console.log(req.body);
+    const {
+        errors,
+        isValid
+    } = validateChangePW(req.body);
+    // Check validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
     const userId = req.body.user.id;
     User.findById(
         mongoose.Types.ObjectId(userId)

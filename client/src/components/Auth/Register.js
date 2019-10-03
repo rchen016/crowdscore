@@ -13,7 +13,7 @@ class Register extends Component {
             name: "",
             email: "",
             password: "",
-            password2: "",
+            confirmPassword: "",
             errors: {}
         };
     }
@@ -35,13 +35,13 @@ class Register extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
+            confirmPassword: this.state.confirmPassword
         };
 
         this.props.registerUser(newUser, this.props.history);
     };
 render() {
-    const { errors, name, email, password,password2 } = this.state;
+    const { errors, name, email, password,confirmPassword } = this.state;
 	return (
 
 		<div className="authForm">
@@ -61,7 +61,7 @@ render() {
 					<span className="red-text">
 	                     {errors.name}
 	                     {errors.nameincorrect}
-	                   </span>
+	                </span>
 					<div className="form-group">
 						<input
 						className={classnames("form-control", {
@@ -77,7 +77,7 @@ render() {
 					<span className="red-text">
 	                     {errors.email}
 	                     {errors.emailincorrect}
-	                   </span>
+	                </span>
 					<div className="form-group">
 						<input
 						className={classnames("form-control", {
@@ -93,23 +93,23 @@ render() {
 					<span className="red-text">
 	                     {errors.password}
 	                     {errors.passwordincorrect}
-	                   </span>
+	                </span>
 					<div className="form-group">
 						<input
 						className={classnames("form-control", {
-							invalid: errors.password2 || errors.password2incorrect
+							invalid: errors.confirmPassword || errors.confirmPasswordincorrect
 							})}
 						type="password"
-						name="password2"
-						id="password2"
+						name="confirmPassword"
+						id="confirmPassword"
 						placeholder="Confirm Password"
-						value={password2}
+						value={confirmPassword}
 						onChange={this.onChange}/>
 					</div>
 					<span className="red-text">
-	                     {errors.password2}
-	                     {errors.password2incorrect}
-	                   </span>
+	                     {errors.confirmPassword}
+	                     {errors.confirmPasswordincorrect}
+	                </span>
 					<p> Already have account? <Link to="/login">Login</Link></p>
 					<div className="form-group">
 						<button type="Submit" className="btn btn-lg btn-info btn-block">Sign Up</button>
@@ -121,15 +121,15 @@ render() {
 }
 
 Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
+    auth: state.auth,
+    errors: state.errors
 });
 export default connect(
-  mapStateToProps,
-  { registerUser }
+    mapStateToProps,
+    { registerUser }
 )(withRouter(Register));
