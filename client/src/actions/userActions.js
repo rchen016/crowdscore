@@ -29,3 +29,19 @@ export const changePassword = (contentData, history) => dispatch =>{
             })
         );
 };
+
+// export const retrieveContentList = (contentData, history) => dispatch =>{
+//     console.log("UA: Retrieve: ",contentData);
+//     axios
+//         .post("api/users/getContentList", contentData)
+//         .then(res => {
+//             console.log("What is Res: ", res);
+//             history.push("/settings")
+//         })
+//         .catch(err=>
+//             dispatch({
+//                 type: GET_ERRORS,
+//                 payload: err.response.data
+//             })
+//         );
+// };

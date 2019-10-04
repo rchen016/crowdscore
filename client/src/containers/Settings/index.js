@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import "./index.css";
 import { changePassword } from "../../actions/userActions";
+// import { retrieveContentList } from "../../actions/userActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
+import axios from 'axios';
 
 const customStyles = {
     content : {
@@ -26,7 +28,8 @@ class Settings extends Component{
             modalIsOpen: false,
             newPassword: "",
             confirmNewPassword: "",
-            errors: {}
+            errors: {},
+            contentList: {}
         };
 
         this.openModal = this.openModal.bind(this);
@@ -34,7 +37,7 @@ class Settings extends Component{
         this.closeModal = this.closeModal.bind(this);
 
     }
-    
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
@@ -56,6 +59,28 @@ class Settings extends Component{
         this.setState({modalIsOpen: false});
     }
 
+    displayContentList = e => {
+        var temp = [];
+        console.log("Start Retrieval",this);
+        //this.props.retrieveContentList(this.props.auth, this.props.history);
+        axios.post('/api/users/getContentList', this.props.auth)
+            .then(res=>{
+                // for(var i=0; i< res.data.contentList.length;i++){
+                //     contentImageList.push(res.data.contentList[i][1]);
+                //     contentPath.push(res.data.contentList[i][0]);
+                // }
+                // this.setState({listOfContent:contentImageList, listOfPath: contentPath });
+                console.log("Rezzy: ",res.data);
+                for(var i = 0; i< res.data.length;i++){
+                    temp.push(res.data[i][1]);
+                }
+                this.setState({contentList:temp});
+                console.log(this.state.contentList);
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+    }
     onChangePWSubmits = e => {
         console.log("Changing Password");
         e.preventDefault();
@@ -77,9 +102,23 @@ class Settings extends Component{
 
     render(){
 
-        const { newPassword, confirmNewPassword, errors } = this.state;
+        const { newPassword, confirmNewPassword, errors, contentList } = this.state;
         return(
             <div>
+                <button onClick={this.displayContentList}>test</button>
+                {contentList.length}
+                {
+                    Object.keys(contentList).length!==0
+                    &&
+                    contentList.map(((item,index)=>(
+                        <img
+                          className="caroImg"
+                          src={item}
+                          alt="First slide"
+                          />
+                    )))
+
+                }
                 <form onSubmit={this.onChangePWSubmits}>
                     <div className="form-group">
                         <input
@@ -128,15 +167,15 @@ class Settings extends Component{
                     <h2 ref={subtitle => this.subtitle = subtitle}>Settings</h2>
 
                     <div>
-                        <ul class="list-group">
-                            <li class="list-group-item">Change Password</li>
-                            <li class="list-group-item">Edit Content List</li>
-                            <li class="list-group-item">Filler Settings Option 1</li>
-                            <li class="list-group-item">Filler Settings Option 2</li>
-                            <li class="list-group-item">Filler Settings Option 3</li>
-                            <li class="list-group-item">Filler Settings Option 4</li>
-                            <li class="list-group-item">Filler Settings Option 5</li>
-                            <li class="list-group-item">Filler Settings Option 6</li>
+                        <ul className="list-group">
+                            <li className="list-group-item">Change Password</li>
+                            <li className="list-group-item">Edit Content List</li>
+                            <li className="list-group-item">Filler Settings Option 1</li>
+                            <li className="list-group-item">Filler Settings Option 2</li>
+                            <li className="list-group-item">Filler Settings Option 3</li>
+                            <li className="list-group-item">Filler Settings Option 4</li>
+                            <li className="list-group-item">Filler Settings Option 5</li>
+                            <li className="list-group-item">Filler Settings Option 6</li>
                         </ul>
                     </div>
                 </Modal>
@@ -154,7 +193,10 @@ const mapStateToProps = state => ({
     errors: state.errors,
     auth: state.auth
 });
+const mapDispatchToProps = {
+    changePassword
+}
 export default connect(
     mapStateToProps,
-    { changePassword }
+    mapDispatchToProps
 )(withRouter(Settings));

@@ -219,4 +219,21 @@ router.post("/api/users/changePW", (req,res)=>{
         console.log(err);
     });
 });
+
+router.post("/api/users/getContentList", (req,res)=>{
+    console.log("API USER");
+    const userId = req.body.user.id;
+    User.findById(
+        mongoose.Types.ObjectId(userId)
+    )
+    .then(user=>{
+        if(!user){
+            console.log("User Not Found");
+            return;
+        }
+        console.log("Content List: ",user.contentList);
+        res.send(user.contentList);
+    })
+
+});
 module.exports = router;
