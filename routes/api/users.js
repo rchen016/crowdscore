@@ -236,4 +236,30 @@ router.post("/api/users/getContentList", (req,res)=>{
     })
 
 });
+
+router.post("/api/users/removeContent", (req,res)=>{
+    console.log("Remove Here", req.body);
+    const userId = req.body.auth.user.id;
+    console.log(userId);
+    User.findById(
+        mongoose.Types.ObjectId(userId)
+    )
+    .then(user=>{
+        if(!user){
+            console.log("User Not Found");
+            return;
+        }
+        for(var i=0;i<user.contentList.length;i++){
+            console.log("Check CL: ",user.contentList[i][1]);
+            console.log("Removing...",req.body.toRemove);
+            if(user.contentList[i][1]===req.body.toRemove){
+                console.log("FOUND and REMOVE");
+                user.contentList.splice(i,1);
+                user.save();
+                break;
+            }
+        }
+        console.log("The User, ", user.contentList);
+    })
+});
 module.exports = router;

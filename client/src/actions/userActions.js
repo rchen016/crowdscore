@@ -29,7 +29,17 @@ export const changePassword = (contentData, history) => dispatch =>{
             })
         );
 };
-
+// export const removeContent = (contentData, history) => dispatch => {
+//     axios.post("api/users/removeContent",contentData)
+//         .then(res=>{
+//             history.push("/settings")
+//         })
+//         .catch(err=>
+//             dispatch({
+//                 type: GET_ERRORS,
+//                 payload: err.response.data
+//             }));
+// };
 // export const retrieveContentList = (contentData, history) => dispatch =>{
 //     console.log("UA: Retrieve: ",contentData);
 //     axios

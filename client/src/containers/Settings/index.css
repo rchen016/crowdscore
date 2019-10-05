@@ -11,3 +11,8 @@
     marginRight : '-50%';
     transform   : 'translate(-50%, -50%)';
 }
+
+.settingImg{
+    height: 50px;
+    width: 50px;
+}

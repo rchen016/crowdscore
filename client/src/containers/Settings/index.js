@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import "./index.css";
 import { changePassword } from "../../actions/userActions";
-// import { retrieveContentList } from "../../actions/userActions";
+// import { removeContent } from "../../actions/userActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -100,6 +100,17 @@ class Settings extends Component{
         });
     };
 
+    removeContent = e =>{
+        //remove content from Content List
+        var temp= {};
+        temp.auth = this.props.auth;
+        temp.toRemove = e;
+        console.log("people check",temp);
+        axios.post("/api/users/removeContent",temp)
+            .then(res=>this.setState(this.state))
+            .catch(err=>console.log(err));
+    }
+
     render(){
 
         const { newPassword, confirmNewPassword, errors, contentList } = this.state;
@@ -107,18 +118,24 @@ class Settings extends Component{
             <div>
                 <button onClick={this.displayContentList}>test</button>
                 {contentList.length}
-                {
-                    Object.keys(contentList).length!==0
-                    &&
-                    contentList.map(((item,index)=>(
-                        <img
-                          className="caroImg"
-                          src={item}
-                          alt="First slide"
-                          />
-                    )))
+                <ul>
+                    {
+                        Object.keys(contentList).length!==0
+                        &&
+                        contentList.map(((item,index)=>(
+                            <li>
+                                <img
+                                  key={item}
+                                  className="settingImg"
+                                  src={item}
+                                  alt="First slide"
+                                  />
+                                  <button onClick={()=>this.removeContent(item)}>X</button>
+                              </li>
+                        )))
+                    }
+                </ul>
 
-                }
                 <form onSubmit={this.onChangePWSubmits}>
                     <div className="form-group">
                         <input

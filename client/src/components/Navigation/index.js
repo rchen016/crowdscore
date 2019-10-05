@@ -42,6 +42,7 @@ onLogoutClick = e => {
 								user.name ? (
 									<Nav.Item>
 										<Nav.Link href="/profile">Profile</Nav.Link>
+										<Nav.Link href="/profile">Settings</Nav.Link>
 										<Nav.Link onClick={this.onLogoutClick}>Logout</Nav.Link>
 									</Nav.Item>
 
