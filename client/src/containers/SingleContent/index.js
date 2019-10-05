@@ -53,6 +53,7 @@ class SingleContent extends Component{
 			console.log("HMM", storage);
 			this.props.addContent(storage,this.props.history);
 		}
+		window.location.reload();
 	}
 
 	componentDidMount(){

@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import axios from 'axios';
 
+
 const customStyles = {
     content : {
         top         : '50%',
@@ -107,17 +108,18 @@ class Settings extends Component{
         temp.toRemove = e;
         console.log("people check",temp);
         axios.post("/api/users/removeContent",temp)
-            .then(res=>this.setState(this.state))
+            .then(res=>console.log("removed"))
             .catch(err=>console.log(err));
+        window.location.reload();
     }
 
     render(){
 
         const { newPassword, confirmNewPassword, errors, contentList } = this.state;
         return(
+
             <div>
-                <button onClick={this.displayContentList}>test</button>
-                {contentList.length}
+                <button onClick={this.displayContentList}>Edit Content List</button>
                 <ul>
                     {
                         Object.keys(contentList).length!==0

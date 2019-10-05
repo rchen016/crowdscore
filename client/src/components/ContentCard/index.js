@@ -213,12 +213,12 @@ const ContentCard = (props) => {
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
 							    {
- 								   props.tmdb.genres!==null
+ 								   Object.keys(props.tmdb.genres).length!==0
  								   &&
  								   <Card.Title className="showInfoContent tvRated"> <strong>{props.tmdb.genres[0].name}</strong> </Card.Title>
  							   }
  							   {
- 								    props.tmdb.genres===null
+								   Object.keys(props.tmdb.genres).length===0
  								   &&
  								   <Card.Text className="text-center"> No Rating Found </Card.Text>
  							   }
