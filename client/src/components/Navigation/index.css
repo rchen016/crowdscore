@@ -1,0 +1,16 @@
+.navbar{
+    background-color: #222;
+    margin-bottom: 25px;
+}
+.navbar-brand, .navbar-nav .nav-link {
+    &:hover{
+        color: white;
+    }
+}
+a.nav-link{
+    background: #222;
+    color: #FFF !important;
+}
+a.titleFont{
+    color: #FFF !important;
+}

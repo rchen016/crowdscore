@@ -43,7 +43,11 @@ const ContentCard = (props) => {
 								{
 									props.tvmaze.rating.average===null
 									&&
-									<Card.Text className="text-center"> No TV Maze Rating Found </Card.Text>
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"TV Maze: 0"}/>
+
 								}
 								{
 									props.omdb.imdbRating!==null
@@ -56,7 +60,10 @@ const ContentCard = (props) => {
 								{
 									props.omdb.imdbRating===null
 									&&
-									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"IMDB: 0"}/>
 								}
 								{
 									props.tmdb.results[0].vote_count!==null
@@ -67,9 +74,12 @@ const ContentCard = (props) => {
 										label={"TMDB "+props.tmdb.results[0].vote_average+" ("+props.tmdb.results[0].vote_count+")"}/>
 								}
 								{
-									props.tmdb.results[0].vote_coun===null
+									props.tmdb.results[0].vote_count===null
 									&&
-									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"TMDB: 0"}/>
 								}
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
@@ -195,7 +205,10 @@ const ContentCard = (props) => {
 								{
 									props.tmdb.vote_count===null
 									&&
-									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"TMDB: 0"}/>
 								}
 								{
 									props.omdb.imdbRating!==null
@@ -208,7 +221,10 @@ const ContentCard = (props) => {
 								{
 									props.omdb.imdbRating===null
 									&&
-									<Card.Text className="text-center"> No IMDB Rating Found </Card.Text>
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"IMDB: 0"}/>
 								}
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">

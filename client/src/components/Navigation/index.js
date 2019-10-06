@@ -1,28 +1,9 @@
 import React, {Component} from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
-import styled from 'styled-components';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-
-const Styles = styled.div`
-	.navbar{
-		background-color: #222;
-		margin-bottom: 25px;
-	}
-	.navbar-brand, .navbar-nav .nav-link {
-		&:hover{
-			color: white;
-		}
-	}
-	a.nav-link{
-		background: #222;
-		color: #FFF !important;
-	}
-	a.titleFont{
-		color: #FFF;
-	}
-`;
+import "./index.css";
 
 class NavBar extends Component {
 onLogoutClick = e => {
@@ -32,7 +13,7 @@ onLogoutClick = e => {
 	render(){
 		const { user } = this.props.auth;
 		return(
-			<Styles>
+
 				<Navbar expand="lg">
 					<Navbar.Brand className="titleFont" href="/">CS</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,11 +33,10 @@ onLogoutClick = e => {
 									</Nav.Item>
 								)
 							}
-
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-			</Styles>
+
 		);
 	}
 }
