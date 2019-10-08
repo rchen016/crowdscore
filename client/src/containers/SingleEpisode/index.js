@@ -22,7 +22,7 @@ class SingleEpisode extends Component{
 		const { id } = this.props.match.params;
 		//Fetch Single Episode to pass to Episode Card Component
 		this.setState({ isFetching: true});
-		fetch(`http://api.tvmaze.com/episodes/${id}`)
+		fetch(`https://api.tvmaze.com/episodes/${id}`)
 			.then( (response) => response.json() )
 			.then(json => {this.setState( { tvmaze: json, isFetching: false } ); console.log(json);})
 			.catch( err => console.log(err));

@@ -64,13 +64,13 @@ class SingleContent extends Component{
 		if( this.props.location.pathname.split("/")[1] === "series" ){
 			const { id } = this.props.match.params;
 			console.log("Issa Series");
-			fetch(`http://api.tvmaze.com/shows/${id}?embed=episodes`)
+			fetch(`https://api.tvmaze.com/shows/${id}?embed=episodes`)
 				.then( (response) => response.json() )
 				.then(
 						json => {
 							console.log(json);
 							this.setState( { tvmaze: json } );
-							fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
+							fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
 							.then( (response) => response.json() )
 							.then(
 								json =>{
@@ -97,7 +97,7 @@ class SingleContent extends Component{
 			.then( json =>{
 					console.log("movie check", json);
 					this.setState( { tmdb: json } );
-					fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
+					fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
 					.then( (response) => response.json() )
 					.then( json =>this.setState( { omdb: json }))
 				}
