@@ -3,12 +3,17 @@ const Schema = mongoose.Schema;
 // Create Schema
 const RatingSystemSchema = new Schema({
     ratingStorage:{
-        showName: String,
-        ratings: Array
-    }
+        ratings: [
+            {
+                contentPath: String,
+                rating: Number
+            }
+        ]
+    },
+    rater: String
     ///Rating System
-    /// Show
-    /// [1,2,4,5,10]
+    /// contentPath: /series/#
+    /// rating: 1-100
     ///if show deosnt exist return 0
 
 });

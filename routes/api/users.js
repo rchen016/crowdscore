@@ -262,4 +262,9 @@ router.post("/api/users/removeContent", (req,res)=>{
         console.log("The User, ", user.contentList);
     })
 });
+
+router.post("/series/test", (req,res)=>{
+    console.log("TESTTESTTSTS", req.body.ratingSys);
+    console.log("User ",req.body.auth.user);
+});
 module.exports = router;

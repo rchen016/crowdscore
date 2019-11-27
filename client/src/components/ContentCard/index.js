@@ -3,11 +3,35 @@ import { Card, ProgressBar, Tab, Tabs } from 'react-bootstrap';
 import defaultLogo from '../../assets/default.jpg';
 import './index.css';
 
+function name(rating){
+	console.log("Test",rating);
+	// axios.post("/addUserRating",)
+}
+
 const ContentCard = (props) => {
 
 	if(props.searchMode==="series"){
 		return(
+
+
 			<Card className="sSeriesCard">
+			<form
+				method="POST"
+				action="test"
+			>
+				<select onChange={name(this)} name="ratingSys">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+				</select>
+				<button type="submit">Submit</button>
+			</form>
+
 				{
 					props.tvmaze.image!==null
 					&&
@@ -80,6 +104,22 @@ const ContentCard = (props) => {
 										className="progressBar"
 										now={0}
 										label={"TMDB: 0"}/>
+								}
+								{
+									props.tmdb.results[0].vote_count!==null
+									&&
+									<ProgressBar
+										className="progressBar"
+										now={95}
+										label={"User 95 (10000)"}/>
+								}
+								{
+									props.tmdb.results[0].vote_count===null
+									&&
+									<ProgressBar
+										className="progressBar"
+										now={0}
+										label={"User Rating: 0"}/>
 								}
 						  </Tab>
 						  <Tab eventKey="showInfo" className="tabFont" title="Show Info">
