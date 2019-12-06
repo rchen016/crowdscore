@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Card, ProgressBar, Tab, Tabs } from 'react-bootstrap';
 import defaultLogo from '../../assets/default.jpg';
 import './index.css';
@@ -9,7 +11,8 @@ function name(rating){
 }
 
 const ContentCard = (props) => {
-
+	console.log("location ","/"+props.searchMode+"/"+props.tvmaze.id);
+	console.log(props.tvmaze.id);
 	if(props.searchMode==="series"){
 		return(
 
@@ -20,14 +23,16 @@ const ContentCard = (props) => {
 				action="test"
 			>
 				<select onChange={name(this)} name="ratingSys">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
+					<option value={"1,"+props.auth.user.id+","+"/"+props.searchMode+"/"+props.tvmaze.id}>1</option>
+					<option value={"2,"+props.auth.user.id}>2</option>
+					<option value={"3,"+props.auth.user.id}>3</option>
+					<option value={"4,"+props.auth.user.id}>4</option>
+					<option value={"5,"+props.auth.user.id}>5</option>
+					<option value={"6,"+props.auth.user.id}>6</option>
+					<option value={"7,"+props.auth.user.id}>7</option>
+					<option value={"8,"+props.auth.user.id}>8</option>
+					<option value={"9,"+props.auth.user.id}>9</option>
+					<option value={"10,"+props.auth.user.id}>10</option>
 				</select>
 				<button type="submit">Submit</button>
 			</form>
@@ -345,4 +350,13 @@ const ContentCard = (props) => {
 
 }
 
-export default ContentCard;
+// export default ContentCard;
+ContentCard.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps
+)(ContentCard);

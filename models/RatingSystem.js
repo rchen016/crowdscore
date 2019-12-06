@@ -8,13 +8,13 @@ const RatingSystemSchema = new Schema({
                 contentPath: String,
                 rating: Number
             }
-        ]
-    },
-    rater: String
+        ],
+        rater: String
+    }
     ///Rating System
     /// contentPath: /series/#
     /// rating: 1-100
     ///if show deosnt exist return 0
 
 });
-module.exports = RatingSystemSchema = mongoose.model("ratingsystem", RatingSystemSchema);
+module.exports = RatingSystem = mongoose.model("ratingsystem", RatingSystemSchema);

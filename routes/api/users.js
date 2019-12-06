@@ -8,6 +8,7 @@ const validateLoginInput = require("../../validation/login");
 const validateChangePW = require("../../validation/changePassword");
 const User = require("../../models/User");
 const mongoose = require("mongoose");
+const RatingSystem = require("../../models/RatingSystem");
 
 router.post("/api/users/register", (req, res) => {
     console.log("Here?");
@@ -264,7 +265,12 @@ router.post("/api/users/removeContent", (req,res)=>{
 });
 
 router.post("/series/test", (req,res)=>{
-    console.log("TESTTESTTSTS", req.body.ratingSys);
-    console.log("User ",req.body.auth.user);
+    console.log("TESTTESTTSTS", req.body.ratingSys.split(",")[0]);
+    console.log("TESTTESTTSTS", req.body.ratingSys.split(",")[1]);
+    console.log("TESTTESTTSTS", req.body.ratingSys.split(",")[2]);
+    var rating = req.body.ratingSys.split(",")[0];
+    var rater = req.body.ratingSys.split(",")[1];
+    var pathName = req.body.ratingSys.split(",")[2];
+    //RatingSystem.ratingStorage.ratings.push({pathName, rating});
 });
 module.exports = router;
