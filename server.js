@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const db = require("./config/keys").mongoURI;
+// const db = require("./config/keys").process.env.DATABASEURL;
 
 const passport = require("passport");
 const users = require("./routes/api/users");
