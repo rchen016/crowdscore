@@ -30,6 +30,7 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+
 	render(){
 		 return (
 			<Provider store={store}>
