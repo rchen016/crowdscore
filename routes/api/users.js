@@ -272,5 +272,12 @@ router.post("/series/test", (req,res)=>{
     var rater = req.body.ratingSys.split(",")[1];
     var pathName = req.body.ratingSys.split(",")[2];
     //RatingSystem.ratingStorage.ratings.push({pathName, rating});
+    const newRating = new RatingSystem({
+        contentPath: "/",
+        rater: rater,
+        rating: rating
+    });
+        newRating.push();
+    newRating.save();
 });
 module.exports = router;

@@ -11,8 +11,9 @@ function name(rating){
 }
 
 const ContentCard = (props) => {
-	console.log("location ","/"+props.searchMode+"/"+props.tvmaze.id);
-	console.log(props.tvmaze.id);
+	// console.log("location ","/"+props.searchMode+"/"+props.tvmaze.id);
+	// console.log(props.tvmaze.id);
+	console.log("Props: ", props)
 	if(props.searchMode==="series"){
 		return(
 

@@ -68,20 +68,26 @@ class SingleContent extends Component{
 				.then( (response) => response.json() )
 				.then(
 						json => {
-							console.log(json);
+							console.log("blah", json);
 							this.setState( { tvmaze: json } );
 							fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tvmaze.name}`)
 							.then( (response) => response.json() )
 							.then(
 								json =>{
-									console.log("OMDB");
-									console.log(json);
-									this.setState( { omdb: json } );
+									if(json===undefined)
+										this.setState( { omdb: "" })
+									else
+										this.setState( { omdb: json })
+									// this.setState( { omdb: json } );
 									fetch(`https://api.themoviedb.org/3/search/tv?api_key=c668e9ba0082ada9bd8061d745ade430&language=en-US&query=${this.state.tvmaze.name}`)
 									.then( (response) => response.json() )
 									.then( json =>{
-											console.log(typeof json);
-											this.setState( { tmdb: json } );
+											if(json===undefined)
+												this.setState( { tmdb: "" })
+											else
+												this.setState( { tmdb: json })
+											// console.log(typeof json);
+											// this.setState( { tmdb: json } );
 										}
 									)
 								}
@@ -98,8 +104,18 @@ class SingleContent extends Component{
 					console.log("movie check", json);
 					this.setState( { tmdb: json } );
 					fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=e00e4c89&t=${this.state.tmdb.original_title}`)
-					.then( (response) => response.json() )
-					.then( json =>this.setState( { omdb: json }))
+					.then(
+						 (response) => {response.json()}
+					)
+					.then(
+						json =>{
+							if(json===undefined)
+								this.setState( { omdb: "" })
+							else
+								this.setState( { omdb: json })
+						}
+					)
+					.catch(err => console.log(err))
 				}
 			)
 			.catch( err => console.log(err));
